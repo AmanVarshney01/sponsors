@@ -1,3 +1,12 @@
+name: Scheduler
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches: [ main ]
+
 jobs:
   update-sponsors:
     runs-on: ubuntu-latest
