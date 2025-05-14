@@ -1,50 +1,31 @@
-name: Update Sponsorkit
+name: SponsorKit
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   update-sponsors:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
+      - uses: pnpm/action-setup@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
+      - run: pnpm i
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run Sponsorkit
-        run: pnpm build
+      - run: pnpm run sponsorkit
         env:
           SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORKIT_GITHUB_TOKEN }}
           SPONSORKIT_GITHUB_LOGIN: amanvarshney01
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          if git diff --staged --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "docs: update sponsors data"
-            git push
-          fi
+      - uses: EndBug/add-and-commit@v9
+        with:
+          author_name: GitHub Actions
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
+          message: "chore: update sponsors [ci skip]"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
