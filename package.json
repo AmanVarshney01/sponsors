@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm dlx sponsorkit"
+    "sponsorkit": "sponsorkit"
   },
   "keywords": [],
   "author": "",
