@@ -1,15 +1,19 @@
 {
-  "name": "sponsorkit",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "sponsorkit": "sponsorkit"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "sponsorkit": "^16.4.2"
-  }
+	"name": "sponsorkit",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"sponsorkit": "sponsorkit",
+		"update-sponsors": "pnpm sponsorkit && ./upload-sponsorkit-to-r2.sh"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"sponsorkit": "^16.4.2"
+	},
+	"devDependencies": {
+		"wrangler": "^4.15.2"
+	}
 }
