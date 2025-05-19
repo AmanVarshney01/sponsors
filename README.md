@@ -1,1 +1,1 @@
-![Sponsors](https://cdn.jsdelivr.net/gh/amanvarshney01/sponsors@master/sponsorkit/sponsors.svg)
+![Sponsors](https://sponsors.amanv.dev/sponsors.png)
