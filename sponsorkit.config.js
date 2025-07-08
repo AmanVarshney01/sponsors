@@ -5,5 +5,6 @@ export default defineConfig({
     login: "amanvarshney01",
     type: "user",
   },
+  includePastSponsors: false,
   renderer: "circles",
 });
