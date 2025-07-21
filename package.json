@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "sponsorkit": "sponsorkit",
-    "update-sponsors": "./upload-sponsorkit-to-r2.sh"
+    "update-sponsors": "bun upload-sponsorkit-to-r2.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,6 @@
     "sponsorkit": "^16.5.0"
   },
   "devDependencies": {
-    "wrangler": "^4.20.0"
+    "wrangler": "^4.25.0"
   }
 }
