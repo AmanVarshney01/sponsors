@@ -43,6 +43,32 @@ fs.writeFileSync(
 );
 console.log("Removed avatarBuffer from all sponsor objects.");
 
+const SPECIAL_SPONSOR_DIR = path.join(__dirname, "special-sponsor");
+
+cleanedSponsors.forEach((sponsor) => {
+  if (sponsor.monthlyDollars >= 100) {
+    const logoFile = `${sponsor.sponsor.login}.png`;
+    const logoPath = path.join(SPECIAL_SPONSOR_DIR, logoFile);
+    if (fs.existsSync(logoPath)) {
+      const key = `special-sponsor/${logoFile}`;
+      const cmd = `npx wrangler r2 object put "${BUCKET_NAME}/${key}" --file="${logoPath}" --remote`;
+      console.log(`Uploading ${logoPath} to r2://${BUCKET_NAME}/${key} ...`);
+      try {
+        execSync(cmd, { stdio: "inherit" });
+        sponsor.customLogoUrl = `https://r2.a.com/${key}`;
+      } catch (err) {
+        console.error(`Failed to upload ${logoFile}:`, err);
+      }
+    }
+  }
+});
+
+fs.writeFileSync(
+  SPONSORS_JSON,
+  JSON.stringify(cleanedSponsors, null, 2),
+  "utf8",
+);
+
 function uploadToR2(file) {
   const filePath = path.join(SOURCE_DIR, file);
   if (!fs.existsSync(filePath)) {
