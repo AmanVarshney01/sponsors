@@ -6,6 +6,7 @@ export default defineConfig({
     type: "user",
   },
   includePastSponsors: true,
+  prorateOnetime: true,
   tiers: [
     {
       title: "Past Sponsors",

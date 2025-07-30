@@ -207,6 +207,22 @@
   },
   {
     "sponsor": {
+      "login": "brandonmcconnell",
+      "name": "Brandon McConnell",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/5913254?u=50b053e50a75f2f4b320a9b5cd0173ce16e379fe&v=4",
+      "websiteUrl": "https://codepen.io/brandonmcconnell",
+      "linkUrl": "https://github.com/brandonmcconnell",
+      "type": "User"
+    },
+    "isOneTime": false,
+    "monthlyDollars": 5,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$5 a month",
+    "createdAt": "2025-06-12T16:37:43Z",
+    "provider": "github"
+  },
+  {
+    "sponsor": {
       "login": "Insik-Han",
       "name": "Insik Han",
       "avatarUrl": "https://avatars.githubusercontent.com/u/63291908?u=3ef3243d2919c693d8456a8126078bfc56051f64&v=4",
@@ -230,7 +246,7 @@
       "type": "User"
     },
     "isOneTime": true,
-    "monthlyDollars": -1,
+    "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "$421 one time",
     "createdAt": "2025-06-23T00:45:31Z",
@@ -331,5 +347,20 @@
     "createdAt": "2025-07-29T11:38:28Z",
     "provider": "github",
     "customLogoUrl": "https://r2.a.com/special-sponsor/BetterStackHQ.png"
+  },
+  {
+    "sponsor": {
+      "login": "muperdev",
+      "name": "Mup",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/85489543?u=d8571020ca8aaabc2b3f76188001b97eb7dac954&v=4",
+      "linkUrl": "https://github.com/muperdev",
+      "type": "User"
+    },
+    "isOneTime": true,
+    "monthlyDollars": 10,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$10 one time",
+    "createdAt": "2025-07-30T08:28:26Z",
+    "provider": "github"
   }
 ]
