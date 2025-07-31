@@ -1,0 +1,1103 @@
+{
+  "fetchedAt": "2025-07-31T05:17:18.981Z",
+  "login": "amanvarshney01",
+  "activeSponsors": 10,
+  "pastSponsors": 10,
+  "totalSponsors": 10,
+  "sponsorsByTier": {
+    "$20 a month": [
+      {
+        "id": "S_kwDOArNpK84ABQw1",
+        "createdAt": "2025-04-13T18:44:01Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDQ6VXNlcjE2Njk5NDE4",
+          "login": "bapspatil",
+          "name": "Bapusaheb Patil",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/16699418?v=4",
+          "url": "https://github.com/bapspatil",
+          "isHireable": true,
+          "location": "Northern Hemisphere, Earth",
+          "company": "Baps Patil",
+          "bio": "IDF Certified Designer • Developer • Design Engineer",
+          "websiteUrl": "https://www.bapspatil.com",
+          "twitterUsername": "baps_patil",
+          "createdAt": "2016-01-14T07:48:17Z",
+          "updatedAt": "2025-07-19T17:48:15Z",
+          "databaseId": 16699418,
+          "email": "hi@bapspatil.com",
+          "followers": {
+            "totalCount": 310
+          },
+          "following": {
+            "totalCount": 328
+          },
+          "repositories": {
+            "totalCount": 119
+          },
+          "starredRepositories": {
+            "totalCount": 668
+          },
+          "isViewer": false,
+          "isFollowingViewer": true,
+          "viewerIsFollowing": true,
+          "viewerCanFollow": true
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB2TT",
+          "name": "$20 a month",
+          "description": "",
+          "monthlyPriceInDollars": 20,
+          "isOneTime": false,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 2000
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      }
+    ],
+    "$5 one time": [
+      {
+        "id": "S_kwDOArNpK84ABWVH",
+        "createdAt": "2025-07-24T12:45:27Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDQ6VXNlcjM1ODQxMg==",
+          "login": "piotrkulpinski",
+          "name": "Piotr Kulpinski",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/358412?v=4",
+          "url": "https://github.com/piotrkulpinski",
+          "isHireable": true,
+          "location": "Krakow, Poland",
+          "company": null,
+          "bio": "",
+          "websiteUrl": "https://dirstarter.com",
+          "twitterUsername": null,
+          "createdAt": "2010-08-09T09:19:31Z",
+          "updatedAt": "2025-07-24T12:46:26Z",
+          "databaseId": 358412,
+          "email": "piotr@kulpinski.pl",
+          "followers": {
+            "totalCount": 221
+          },
+          "following": {
+            "totalCount": 17
+          },
+          "repositories": {
+            "totalCount": 21
+          },
+          "starredRepositories": {
+            "totalCount": 461
+          },
+          "isViewer": false,
+          "isFollowingViewer": false,
+          "viewerIsFollowing": false,
+          "viewerCanFollow": true
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB7nI",
+          "name": "$5 one time",
+          "description": "",
+          "monthlyPriceInDollars": 5,
+          "isOneTime": true,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 500
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      },
+      {
+        "id": "S_kwDOArNpK84ABVTQ",
+        "createdAt": "2025-07-08T02:27:21Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "U_kgDODKUMQQ",
+          "login": "feelswtc",
+          "name": null,
+          "avatarUrl": "https://avatars.githubusercontent.com/u/212143169?v=4",
+          "url": "https://github.com/feelswtc",
+          "isHireable": false,
+          "location": null,
+          "company": null,
+          "bio": null,
+          "websiteUrl": null,
+          "twitterUsername": null,
+          "createdAt": "2025-05-17T15:50:29Z",
+          "updatedAt": "2025-07-08T21:27:45Z",
+          "databaseId": 212143169,
+          "email": "",
+          "followers": {
+            "totalCount": 0
+          },
+          "following": {
+            "totalCount": 0
+          },
+          "repositories": {
+            "totalCount": 0
+          },
+          "starredRepositories": {
+            "totalCount": 0
+          },
+          "isViewer": false,
+          "isFollowingViewer": false,
+          "viewerIsFollowing": false,
+          "viewerCanFollow": false
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB6XQ",
+          "name": "$5 one time",
+          "description": "",
+          "monthlyPriceInDollars": 5,
+          "isOneTime": true,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 500
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      }
+    ],
+    "$10 one time": [
+      {
+        "id": "S_kwDOArNpK84ABVYR",
+        "createdAt": "2025-07-09T16:30:39Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDQ6VXNlcjE5ODI1ODI=",
+          "login": "javayhu",
+          "name": "javayhu",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1982582?u=6c0456e053ae4033c54e9b0fb56e8f72df495fe0&v=4",
+          "url": "https://github.com/javayhu",
+          "isHireable": false,
+          "location": "China",
+          "company": null,
+          "bio": "Build in public, Code for future",
+          "websiteUrl": "https://MkSaaS.com",
+          "twitterUsername": null,
+          "createdAt": "2012-07-16T07:25:46Z",
+          "updatedAt": "2025-07-23T16:27:59Z",
+          "databaseId": 1982582,
+          "email": "",
+          "followers": {
+            "totalCount": 1570
+          },
+          "following": {
+            "totalCount": 325
+          },
+          "repositories": {
+            "totalCount": 266
+          },
+          "starredRepositories": {
+            "totalCount": 2220
+          },
+          "isViewer": false,
+          "isFollowingViewer": false,
+          "viewerIsFollowing": false,
+          "viewerCanFollow": true
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB6df",
+          "name": "$10 one time",
+          "description": "",
+          "monthlyPriceInDollars": 10,
+          "isOneTime": true,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 1000
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      },
+      {
+        "id": "S_kwDOArNpK84ABWs6",
+        "createdAt": "2025-07-30T08:28:26Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDQ6VXNlcjg1NDg5NTQz",
+          "login": "muperdev",
+          "name": "Mup",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/85489543?u=d8571020ca8aaabc2b3f76188001b97eb7dac954&v=4",
+          "url": "https://github.com/muperdev",
+          "isHireable": false,
+          "location": "Dubai",
+          "company": null,
+          "bio": "0.1x Engineer",
+          "websiteUrl": null,
+          "twitterUsername": null,
+          "createdAt": "2021-06-07T10:16:19Z",
+          "updatedAt": "2025-07-30T20:56:20Z",
+          "databaseId": 85489543,
+          "email": "",
+          "followers": {
+            "totalCount": 29
+          },
+          "following": {
+            "totalCount": 28
+          },
+          "repositories": {
+            "totalCount": 11
+          },
+          "starredRepositories": {
+            "totalCount": 14
+          },
+          "isViewer": false,
+          "isFollowingViewer": false,
+          "viewerIsFollowing": false,
+          "viewerCanFollow": true
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB8EI",
+          "name": "$10 one time",
+          "description": "",
+          "monthlyPriceInDollars": 10,
+          "isOneTime": true,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 1000
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      }
+    ],
+    "$5 a month": [
+      {
+        "id": "S_kwDOArNpK84ABT-0",
+        "createdAt": "2025-06-12T16:37:43Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDQ6VXNlcjU5MTMyNTQ=",
+          "login": "brandonmcconnell",
+          "name": "Brandon McConnell",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/5913254?u=50b053e50a75f2f4b320a9b5cd0173ce16e379fe&v=4",
+          "url": "https://github.com/brandonmcconnell",
+          "isHireable": true,
+          "location": "Miami, FL",
+          "company": "DreamThinkBuild",
+          "bio": "",
+          "websiteUrl": "https://codepen.io/brandonmcconnell",
+          "twitterUsername": "branmcconnell",
+          "createdAt": "2013-11-11T21:37:33Z",
+          "updatedAt": "2025-07-24T18:36:34Z",
+          "databaseId": 5913254,
+          "email": "brandon@dreamthinkbuild.com",
+          "followers": {
+            "totalCount": 192
+          },
+          "following": {
+            "totalCount": 160
+          },
+          "repositories": {
+            "totalCount": 73
+          },
+          "starredRepositories": {
+            "totalCount": 302
+          },
+          "isViewer": false,
+          "isFollowingViewer": false,
+          "viewerIsFollowing": false,
+          "viewerCanFollow": true
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB5E-",
+          "name": "$5 a month",
+          "description": "",
+          "monthlyPriceInDollars": 5,
+          "isOneTime": false,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 500
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      },
+      {
+        "id": "S_kwDOArNpK84ABSqt",
+        "createdAt": "2025-05-18T13:04:39Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDQ6VXNlcjIwMjcxOTY4",
+          "login": "ixahmedxi",
+          "name": "Ahmed Elsakaan",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/20271968?u=ab95f47bb661569e9b4ab1dadfdb802b77f9d1c6&v=4",
+          "url": "https://github.com/ixahmedxi",
+          "isHireable": true,
+          "location": "London, United Kingdom",
+          "company": null,
+          "bio": "Frontend web developer, passionate about making really cool web apps.",
+          "websiteUrl": "https://elsakaan.dev",
+          "twitterUsername": "ixahmedxii",
+          "createdAt": "2016-07-03T23:22:19Z",
+          "updatedAt": "2025-07-07T11:02:40Z",
+          "databaseId": 20271968,
+          "email": "ahmedtarek3214@gmail.com",
+          "followers": {
+            "totalCount": 1072
+          },
+          "following": {
+            "totalCount": 62
+          },
+          "repositories": {
+            "totalCount": 47
+          },
+          "starredRepositories": {
+            "totalCount": 481
+          },
+          "isViewer": false,
+          "isFollowingViewer": false,
+          "viewerIsFollowing": false,
+          "viewerCanFollow": true
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB3d0",
+          "name": "$5 a month",
+          "description": "",
+          "monthlyPriceInDollars": 5,
+          "isOneTime": false,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 500
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      },
+      {
+        "id": "S_kwDOArNpK84ABVml",
+        "createdAt": "2025-07-13T11:55:12Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDQ6VXNlcjQyODAyOTIy",
+          "login": "Ali-Hussein-dev",
+          "name": "Ali Hussein",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/42802922?u=a2e8d6398499953ff88e03484c3fafd2d3611491&v=4",
+          "url": "https://github.com/Ali-Hussein-dev",
+          "isHireable": false,
+          "location": "Germany, Hamburg",
+          "company": null,
+          "bio": "",
+          "websiteUrl": "https://ali-hussein.com",
+          "twitterUsername": "AliHussein_20",
+          "createdAt": "2018-08-29T10:05:13Z",
+          "updatedAt": "2025-07-14T16:01:06Z",
+          "databaseId": 42802922,
+          "email": "",
+          "followers": {
+            "totalCount": 63
+          },
+          "following": {
+            "totalCount": 6
+          },
+          "repositories": {
+            "totalCount": 90
+          },
+          "starredRepositories": {
+            "totalCount": 51
+          },
+          "isViewer": false,
+          "isFollowingViewer": false,
+          "viewerIsFollowing": false,
+          "viewerCanFollow": true
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB6t3",
+          "name": "$5 a month",
+          "description": "",
+          "monthlyPriceInDollars": 5,
+          "isOneTime": false,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 500
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      }
+    ],
+    "$6 a month": [
+      {
+        "id": "S_kwDOArNpK84ABWIM",
+        "createdAt": "2025-07-20T17:34:46Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDQ6VXNlcjQ4OTk3NjM0",
+          "login": "Just-Moh-it",
+          "name": "Mohit Yadav",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/48997634?u=961e156e9b367e2bdd2a260e33f1bcccca84305f&v=4",
+          "url": "https://github.com/Just-Moh-it",
+          "isHireable": true,
+          "location": "Austin, TX",
+          "company": null,
+          "bio": "i like building cool stuff",
+          "websiteUrl": "https://mohitya.dev",
+          "twitterUsername": "just_moh_it",
+          "createdAt": "2019-03-27T16:11:17Z",
+          "updatedAt": "2025-07-21T18:34:52Z",
+          "databaseId": 48997634,
+          "email": "mohit@mohitya.dev",
+          "followers": {
+            "totalCount": 237
+          },
+          "following": {
+            "totalCount": 114
+          },
+          "repositories": {
+            "totalCount": 38
+          },
+          "starredRepositories": {
+            "totalCount": 737
+          },
+          "isViewer": false,
+          "isFollowingViewer": true,
+          "viewerIsFollowing": false,
+          "viewerCanFollow": true
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB7Xq",
+          "name": "$6 a month",
+          "description": "",
+          "monthlyPriceInDollars": 6,
+          "isOneTime": false,
+          "isCustomAmount": true,
+          "monthlyPriceInCents": 600
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      }
+    ],
+    "$100 one time": [
+      {
+        "id": "S_kwDOArNpK84ABWpH",
+        "createdAt": "2025-07-29T11:38:28Z",
+        "isActive": true,
+        "privacyLevel": "PUBLIC",
+        "sponsorEntity": {
+          "id": "MDEyOk9yZ2FuaXphdGlvbjg1NTYyMzM3",
+          "login": "BetterStackHQ",
+          "name": "Better Stack",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/85562337?v=4",
+          "url": "https://github.com/BetterStackHQ",
+          "location": null,
+          "description": "Welcome to Better Stack 👋 We make delightful observability tools that turn your logs & monitoring into a secret weapon for shipping better software faster.",
+          "websiteUrl": "https://betterstack.com/",
+          "twitterUsername": "BetterStackHQ",
+          "createdAt": "2021-06-08T12:46:13Z",
+          "updatedAt": "2025-06-09T09:05:01Z",
+          "databaseId": 85562337,
+          "email": "hello@betterstack.com",
+          "membersWithRole": {
+            "totalCount": 2
+          },
+          "repositories": {
+            "totalCount": 21
+          },
+          "viewerCanAdminister": false,
+          "viewerIsAMember": false
+        },
+        "tier": {
+          "id": "ST_kwDOArNpK84AB7nX",
+          "name": "$100 one time",
+          "description": "- You're a Special Sponsor\r\n- Avatar appears above all others, highlighted\r\n- Shown on every page of the docs",
+          "monthlyPriceInDollars": 100,
+          "isOneTime": true,
+          "isCustomAmount": false,
+          "monthlyPriceInCents": 10000
+        },
+        "sponsorable": {
+          "id": "MDQ6VXNlcjQ1MzEyMjk5",
+          "login": "AmanVarshney01",
+          "name": "Aman Varshney",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+          "url": "https://github.com/AmanVarshney01"
+        }
+      }
+    ]
+  },
+  "sponsors": [
+    {
+      "id": "S_kwDOArNpK84ABQw1",
+      "createdAt": "2025-04-13T18:44:01Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDQ6VXNlcjE2Njk5NDE4",
+        "login": "bapspatil",
+        "name": "Bapusaheb Patil",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/16699418?v=4",
+        "url": "https://github.com/bapspatil",
+        "isHireable": true,
+        "location": "Northern Hemisphere, Earth",
+        "company": "Baps Patil",
+        "bio": "IDF Certified Designer • Developer • Design Engineer",
+        "websiteUrl": "https://www.bapspatil.com",
+        "twitterUsername": "baps_patil",
+        "createdAt": "2016-01-14T07:48:17Z",
+        "updatedAt": "2025-07-19T17:48:15Z",
+        "databaseId": 16699418,
+        "email": "hi@bapspatil.com",
+        "followers": {
+          "totalCount": 310
+        },
+        "following": {
+          "totalCount": 328
+        },
+        "repositories": {
+          "totalCount": 119
+        },
+        "starredRepositories": {
+          "totalCount": 668
+        },
+        "isViewer": false,
+        "isFollowingViewer": true,
+        "viewerIsFollowing": true,
+        "viewerCanFollow": true
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB2TT",
+        "name": "$20 a month",
+        "description": "",
+        "monthlyPriceInDollars": 20,
+        "isOneTime": false,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 2000
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABWVH",
+      "createdAt": "2025-07-24T12:45:27Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDQ6VXNlcjM1ODQxMg==",
+        "login": "piotrkulpinski",
+        "name": "Piotr Kulpinski",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/358412?v=4",
+        "url": "https://github.com/piotrkulpinski",
+        "isHireable": true,
+        "location": "Krakow, Poland",
+        "company": null,
+        "bio": "",
+        "websiteUrl": "https://dirstarter.com",
+        "twitterUsername": null,
+        "createdAt": "2010-08-09T09:19:31Z",
+        "updatedAt": "2025-07-24T12:46:26Z",
+        "databaseId": 358412,
+        "email": "piotr@kulpinski.pl",
+        "followers": {
+          "totalCount": 221
+        },
+        "following": {
+          "totalCount": 17
+        },
+        "repositories": {
+          "totalCount": 21
+        },
+        "starredRepositories": {
+          "totalCount": 461
+        },
+        "isViewer": false,
+        "isFollowingViewer": false,
+        "viewerIsFollowing": false,
+        "viewerCanFollow": true
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB7nI",
+        "name": "$5 one time",
+        "description": "",
+        "monthlyPriceInDollars": 5,
+        "isOneTime": true,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 500
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABVYR",
+      "createdAt": "2025-07-09T16:30:39Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDQ6VXNlcjE5ODI1ODI=",
+        "login": "javayhu",
+        "name": "javayhu",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/1982582?u=6c0456e053ae4033c54e9b0fb56e8f72df495fe0&v=4",
+        "url": "https://github.com/javayhu",
+        "isHireable": false,
+        "location": "China",
+        "company": null,
+        "bio": "Build in public, Code for future",
+        "websiteUrl": "https://MkSaaS.com",
+        "twitterUsername": null,
+        "createdAt": "2012-07-16T07:25:46Z",
+        "updatedAt": "2025-07-23T16:27:59Z",
+        "databaseId": 1982582,
+        "email": "",
+        "followers": {
+          "totalCount": 1570
+        },
+        "following": {
+          "totalCount": 325
+        },
+        "repositories": {
+          "totalCount": 266
+        },
+        "starredRepositories": {
+          "totalCount": 2220
+        },
+        "isViewer": false,
+        "isFollowingViewer": false,
+        "viewerIsFollowing": false,
+        "viewerCanFollow": true
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB6df",
+        "name": "$10 one time",
+        "description": "",
+        "monthlyPriceInDollars": 10,
+        "isOneTime": true,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 1000
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABT-0",
+      "createdAt": "2025-06-12T16:37:43Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDQ6VXNlcjU5MTMyNTQ=",
+        "login": "brandonmcconnell",
+        "name": "Brandon McConnell",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/5913254?u=50b053e50a75f2f4b320a9b5cd0173ce16e379fe&v=4",
+        "url": "https://github.com/brandonmcconnell",
+        "isHireable": true,
+        "location": "Miami, FL",
+        "company": "DreamThinkBuild",
+        "bio": "",
+        "websiteUrl": "https://codepen.io/brandonmcconnell",
+        "twitterUsername": "branmcconnell",
+        "createdAt": "2013-11-11T21:37:33Z",
+        "updatedAt": "2025-07-24T18:36:34Z",
+        "databaseId": 5913254,
+        "email": "brandon@dreamthinkbuild.com",
+        "followers": {
+          "totalCount": 192
+        },
+        "following": {
+          "totalCount": 160
+        },
+        "repositories": {
+          "totalCount": 73
+        },
+        "starredRepositories": {
+          "totalCount": 302
+        },
+        "isViewer": false,
+        "isFollowingViewer": false,
+        "viewerIsFollowing": false,
+        "viewerCanFollow": true
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB5E-",
+        "name": "$5 a month",
+        "description": "",
+        "monthlyPriceInDollars": 5,
+        "isOneTime": false,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 500
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABSqt",
+      "createdAt": "2025-05-18T13:04:39Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDQ6VXNlcjIwMjcxOTY4",
+        "login": "ixahmedxi",
+        "name": "Ahmed Elsakaan",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/20271968?u=ab95f47bb661569e9b4ab1dadfdb802b77f9d1c6&v=4",
+        "url": "https://github.com/ixahmedxi",
+        "isHireable": true,
+        "location": "London, United Kingdom",
+        "company": null,
+        "bio": "Frontend web developer, passionate about making really cool web apps.",
+        "websiteUrl": "https://elsakaan.dev",
+        "twitterUsername": "ixahmedxii",
+        "createdAt": "2016-07-03T23:22:19Z",
+        "updatedAt": "2025-07-07T11:02:40Z",
+        "databaseId": 20271968,
+        "email": "ahmedtarek3214@gmail.com",
+        "followers": {
+          "totalCount": 1072
+        },
+        "following": {
+          "totalCount": 62
+        },
+        "repositories": {
+          "totalCount": 47
+        },
+        "starredRepositories": {
+          "totalCount": 481
+        },
+        "isViewer": false,
+        "isFollowingViewer": false,
+        "viewerIsFollowing": false,
+        "viewerCanFollow": true
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB3d0",
+        "name": "$5 a month",
+        "description": "",
+        "monthlyPriceInDollars": 5,
+        "isOneTime": false,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 500
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABVml",
+      "createdAt": "2025-07-13T11:55:12Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDQ6VXNlcjQyODAyOTIy",
+        "login": "Ali-Hussein-dev",
+        "name": "Ali Hussein",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/42802922?u=a2e8d6398499953ff88e03484c3fafd2d3611491&v=4",
+        "url": "https://github.com/Ali-Hussein-dev",
+        "isHireable": false,
+        "location": "Germany, Hamburg",
+        "company": null,
+        "bio": "",
+        "websiteUrl": "https://ali-hussein.com",
+        "twitterUsername": "AliHussein_20",
+        "createdAt": "2018-08-29T10:05:13Z",
+        "updatedAt": "2025-07-14T16:01:06Z",
+        "databaseId": 42802922,
+        "email": "",
+        "followers": {
+          "totalCount": 63
+        },
+        "following": {
+          "totalCount": 6
+        },
+        "repositories": {
+          "totalCount": 90
+        },
+        "starredRepositories": {
+          "totalCount": 51
+        },
+        "isViewer": false,
+        "isFollowingViewer": false,
+        "viewerIsFollowing": false,
+        "viewerCanFollow": true
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB6t3",
+        "name": "$5 a month",
+        "description": "",
+        "monthlyPriceInDollars": 5,
+        "isOneTime": false,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 500
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABWIM",
+      "createdAt": "2025-07-20T17:34:46Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDQ6VXNlcjQ4OTk3NjM0",
+        "login": "Just-Moh-it",
+        "name": "Mohit Yadav",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/48997634?u=961e156e9b367e2bdd2a260e33f1bcccca84305f&v=4",
+        "url": "https://github.com/Just-Moh-it",
+        "isHireable": true,
+        "location": "Austin, TX",
+        "company": null,
+        "bio": "i like building cool stuff",
+        "websiteUrl": "https://mohitya.dev",
+        "twitterUsername": "just_moh_it",
+        "createdAt": "2019-03-27T16:11:17Z",
+        "updatedAt": "2025-07-21T18:34:52Z",
+        "databaseId": 48997634,
+        "email": "mohit@mohitya.dev",
+        "followers": {
+          "totalCount": 237
+        },
+        "following": {
+          "totalCount": 114
+        },
+        "repositories": {
+          "totalCount": 38
+        },
+        "starredRepositories": {
+          "totalCount": 737
+        },
+        "isViewer": false,
+        "isFollowingViewer": true,
+        "viewerIsFollowing": false,
+        "viewerCanFollow": true
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB7Xq",
+        "name": "$6 a month",
+        "description": "",
+        "monthlyPriceInDollars": 6,
+        "isOneTime": false,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 600
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABWs6",
+      "createdAt": "2025-07-30T08:28:26Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDQ6VXNlcjg1NDg5NTQz",
+        "login": "muperdev",
+        "name": "Mup",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/85489543?u=d8571020ca8aaabc2b3f76188001b97eb7dac954&v=4",
+        "url": "https://github.com/muperdev",
+        "isHireable": false,
+        "location": "Dubai",
+        "company": null,
+        "bio": "0.1x Engineer",
+        "websiteUrl": null,
+        "twitterUsername": null,
+        "createdAt": "2021-06-07T10:16:19Z",
+        "updatedAt": "2025-07-30T20:56:20Z",
+        "databaseId": 85489543,
+        "email": "",
+        "followers": {
+          "totalCount": 29
+        },
+        "following": {
+          "totalCount": 28
+        },
+        "repositories": {
+          "totalCount": 11
+        },
+        "starredRepositories": {
+          "totalCount": 14
+        },
+        "isViewer": false,
+        "isFollowingViewer": false,
+        "viewerIsFollowing": false,
+        "viewerCanFollow": true
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB8EI",
+        "name": "$10 one time",
+        "description": "",
+        "monthlyPriceInDollars": 10,
+        "isOneTime": true,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 1000
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABWpH",
+      "createdAt": "2025-07-29T11:38:28Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "MDEyOk9yZ2FuaXphdGlvbjg1NTYyMzM3",
+        "login": "BetterStackHQ",
+        "name": "Better Stack",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/85562337?v=4",
+        "url": "https://github.com/BetterStackHQ",
+        "location": null,
+        "description": "Welcome to Better Stack 👋 We make delightful observability tools that turn your logs & monitoring into a secret weapon for shipping better software faster.",
+        "websiteUrl": "https://betterstack.com/",
+        "twitterUsername": "BetterStackHQ",
+        "createdAt": "2021-06-08T12:46:13Z",
+        "updatedAt": "2025-06-09T09:05:01Z",
+        "databaseId": 85562337,
+        "email": "hello@betterstack.com",
+        "membersWithRole": {
+          "totalCount": 2
+        },
+        "repositories": {
+          "totalCount": 21
+        },
+        "viewerCanAdminister": false,
+        "viewerIsAMember": false
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB7nX",
+        "name": "$100 one time",
+        "description": "- You're a Special Sponsor\r\n- Avatar appears above all others, highlighted\r\n- Shown on every page of the docs",
+        "monthlyPriceInDollars": 100,
+        "isOneTime": true,
+        "isCustomAmount": false,
+        "monthlyPriceInCents": 10000
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    },
+    {
+      "id": "S_kwDOArNpK84ABVTQ",
+      "createdAt": "2025-07-08T02:27:21Z",
+      "isActive": true,
+      "privacyLevel": "PUBLIC",
+      "sponsorEntity": {
+        "id": "U_kgDODKUMQQ",
+        "login": "feelswtc",
+        "name": null,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/212143169?v=4",
+        "url": "https://github.com/feelswtc",
+        "isHireable": false,
+        "location": null,
+        "company": null,
+        "bio": null,
+        "websiteUrl": null,
+        "twitterUsername": null,
+        "createdAt": "2025-05-17T15:50:29Z",
+        "updatedAt": "2025-07-08T21:27:45Z",
+        "databaseId": 212143169,
+        "email": "",
+        "followers": {
+          "totalCount": 0
+        },
+        "following": {
+          "totalCount": 0
+        },
+        "repositories": {
+          "totalCount": 0
+        },
+        "starredRepositories": {
+          "totalCount": 0
+        },
+        "isViewer": false,
+        "isFollowingViewer": false,
+        "viewerIsFollowing": false,
+        "viewerCanFollow": false
+      },
+      "tier": {
+        "id": "ST_kwDOArNpK84AB6XQ",
+        "name": "$5 one time",
+        "description": "",
+        "monthlyPriceInDollars": 5,
+        "isOneTime": true,
+        "isCustomAmount": true,
+        "monthlyPriceInCents": 500
+      },
+      "sponsorable": {
+        "id": "MDQ6VXNlcjQ1MzEyMjk5",
+        "login": "AmanVarshney01",
+        "name": "Aman Varshney",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/45312299?u=3153e14a97701a29b37c87c003b1355ded3d189d&v=4",
+        "url": "https://github.com/AmanVarshney01"
+      }
+    }
+  ]
+}

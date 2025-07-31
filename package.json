@@ -4,14 +4,17 @@
   "main": "index.js",
   "scripts": {
     "sponsorkit": "sponsorkit",
-    "update-sponsors": "bun upload-sponsorkit-to-r2.js"
+    "update-sponsors": "bun upload-sponsorkit-to-r2.js",
+    "fetch-sponsors": "bun fetch-github-sponsors.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "sponsorkit": "^16.5.0"
+    "sponsorkit": "^16.5.0",
+    "graphql-request": "^6.1.0",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "wrangler": "^4.25.0"
