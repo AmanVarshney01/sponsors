@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { execSync } from "child_process";
+import { createInterface } from "readline";
 
 const BUCKET_NAME = "sponsors";
 const SOURCE_DIR = join(__dirname, "sponsorkit");
@@ -77,7 +78,19 @@ function uploadToR2(file) {
   }
 }
 
-uploadToR2("sponsors.json");
-uploadToR2("sponsors.png");
+const rl = createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-console.log("Selected files uploaded to R2 bucket:", BUCKET_NAME);
+rl.question("Do you want to upload the files to R2? (y/n): ", (answer) => {
+  if (answer.toLowerCase() === "y" || answer.toLowerCase() === "yes") {
+    console.log("Proceeding with upload...");
+    uploadToR2("sponsors.json");
+    uploadToR2("sponsors.png");
+    console.log("Selected files uploaded to R2 bucket:", BUCKET_NAME);
+  } else {
+    console.log("Upload cancelled.");
+  }
+  rl.close();
+});
