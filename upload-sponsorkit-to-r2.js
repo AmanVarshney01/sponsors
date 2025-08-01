@@ -1,11 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-const { execSync } = require("child_process");
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { join } from "path";
+import { execSync } from "child_process";
 
 const BUCKET_NAME = "sponsors";
-const SOURCE_DIR = path.join(__dirname, "sponsorkit");
-const SPONSORS_JSON = path.join(SOURCE_DIR, "sponsors.json");
-const SPONSORS_PNG = path.join(SOURCE_DIR, "sponsors.png");
+const SOURCE_DIR = join(__dirname, "sponsorkit");
+const SPONSORS_JSON = join(SOURCE_DIR, "sponsors.json");
+const SPONSORS_PNG = join(SOURCE_DIR, "sponsors.png");
 
 // Step 1: Remove avatarBuffer from sponsors.json
 function removeAvatarBuffer(obj) {
@@ -22,56 +22,48 @@ function removeAvatarBuffer(obj) {
   return obj;
 }
 
-if (!fs.existsSync(SPONSORS_JSON)) {
+if (!existsSync(SPONSORS_JSON)) {
   console.error("Error: sponsors.json does not exist. Run sponsorkit first.");
   process.exit(1);
 }
 
 let sponsors;
 try {
-  sponsors = JSON.parse(fs.readFileSync(SPONSORS_JSON, "utf8"));
+  sponsors = JSON.parse(readFileSync(SPONSORS_JSON, "utf8"));
 } catch (err) {
   console.error("Failed to read or parse sponsors.json:", err);
   process.exit(1);
 }
 
 const cleanedSponsors = removeAvatarBuffer(sponsors);
-fs.writeFileSync(
-  SPONSORS_JSON,
-  JSON.stringify(cleanedSponsors, null, 2),
-  "utf8",
-);
-console.log("Removed avatarBuffer from all sponsor objects.");
 
-const SPECIAL_SPONSOR_DIR = path.join(__dirname, "special-sponsor");
-
-cleanedSponsors.forEach((sponsor) => {
-  if (sponsor.monthlyDollars >= 100) {
-    const logoFile = `${sponsor.sponsor.login}.png`;
-    const logoPath = path.join(SPECIAL_SPONSOR_DIR, logoFile);
-    if (fs.existsSync(logoPath)) {
-      const key = `special-sponsor/${logoFile}`;
-      const cmd = `npx wrangler r2 object put "${BUCKET_NAME}/${key}" --file="${logoPath}" --remote`;
-      console.log(`Uploading ${logoPath} to r2://${BUCKET_NAME}/${key} ...`);
-      try {
-        execSync(cmd, { stdio: "inherit" });
-        sponsor.customLogoUrl = `https://r2.a.com/${key}`;
-      } catch (err) {
-        console.error(`Failed to upload ${logoFile}:`, err);
-      }
-    }
-  }
+// Add custom sponsor entry
+cleanedSponsors.push({
+  sponsor: {
+    login: "brandonmcconnell",
+    name: "Brandon McConnell",
+    avatarUrl:
+      "https://avatars.githubusercontent.com/u/5913254?u=50b053e50a75f2f4b320a9b5cd0173ce16e379fe&v=4",
+    websiteUrl: "https://codepen.io/brandonmcconnell",
+    linkUrl: "https://github.com/brandonmcconnell",
+    type: "User",
+  },
+  isOneTime: false,
+  monthlyDollars: 150,
+  privacyLevel: "PUBLIC",
+  tierName: "$150 one time",
+  createdAt: "2025-06-12T16:37:43Z",
+  provider: "github",
 });
 
-fs.writeFileSync(
-  SPONSORS_JSON,
-  JSON.stringify(cleanedSponsors, null, 2),
-  "utf8",
-);
+console.log("Added custom sponsor: Brandon McConnell");
+
+// Save the modified sponsors JSON
+writeFileSync(SPONSORS_JSON, JSON.stringify(cleanedSponsors, null, 2), "utf8");
 
 function uploadToR2(file) {
-  const filePath = path.join(SOURCE_DIR, file);
-  if (!fs.existsSync(filePath)) {
+  const filePath = join(SOURCE_DIR, file);
+  if (!existsSync(filePath)) {
     console.warn(`Warning: ${filePath} does not exist.`);
     return;
   }
