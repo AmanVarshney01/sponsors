@@ -271,7 +271,7 @@
     "sponsor": {
       "login": "Ali-Hussein-dev",
       "name": "Ali Hussein",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/42802922?u=a2e8d6398499953ff88e03484c3fafd2d3611491&v=4",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/42802922?u=f629c55186aa60bb527d25e6742901a7c4de76bf&v=4",
       "websiteUrl": "https://ali-hussein.com",
       "linkUrl": "https://github.com/Ali-Hussein-dev",
       "type": "User"
@@ -344,6 +344,22 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$10 one time",
     "createdAt": "2025-07-30T08:28:26Z",
+    "provider": "github"
+  },
+  {
+    "sponsor": {
+      "login": "jud3v2",
+      "name": "judikael bellance",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/124008177?u=3091fe0294c8cb9d714cce0d5f819ee9399a2718&v=4",
+      "websiteUrl": "https://agency.jud3v.fr",
+      "linkUrl": "https://github.com/jud3v2",
+      "type": "User"
+    },
+    "isOneTime": true,
+    "monthlyDollars": 5,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$5 one time",
+    "createdAt": "2025-08-01T08:49:18Z",
     "provider": "github"
   },
   {
