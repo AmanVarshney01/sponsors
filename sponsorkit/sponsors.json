@@ -364,6 +364,22 @@
   },
   {
     "sponsor": {
+      "login": "yk-sgr",
+      "name": "Yannick Seeger",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/24418343?u=2d0a63cc929adf00e68b53885a4c6be78a64a251&v=4",
+      "websiteUrl": "https://yseeger.me",
+      "linkUrl": "https://github.com/yk-sgr",
+      "type": "User"
+    },
+    "isOneTime": true,
+    "monthlyDollars": 5,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$5 one time",
+    "createdAt": "2025-08-03T15:34:53Z",
+    "provider": "github"
+  },
+  {
+    "sponsor": {
       "login": "brandonmcconnell",
       "name": "Brandon McConnell",
       "avatarUrl": "https://avatars.githubusercontent.com/u/5913254?u=50b053e50a75f2f4b320a9b5cd0173ce16e379fe&v=4",

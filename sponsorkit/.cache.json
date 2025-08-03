@@ -252,6 +252,23 @@
   },
   {
     "sponsor": {
+      "login": "yk-sgr",
+      "name": "Yannick Seeger",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/24418343?u=2d0a63cc929adf00e68b53885a4c6be78a64a251&v=4",
+      "websiteUrl": "https://yseeger.me",
+      "linkUrl": "https://github.com/yk-sgr",
+      "type": "User",
+      "avatarBuffer": "UklGRlQCAABXRUJQVlA4IEgCAABQEACdASp4AHgAPm02mEgkIyKhIpZqCIANiWkAE51ru/8dwgdwMXc+bvQ9mo+ir1IA4yfXndz7C4fQFdc0tPVqiTjU2hTcHYlGS0TxQaNxWP/tkQM44JvLeAYU+WzwtZxiaQuWd813k2ZPEjiLEB6fxYSjlAIHx+po+qpeYXhiuqiVp3LCxed3d3MAAP78XNBF/8tf8PIXIr/hryCa9ZUmjCX+M+bx6VZ+Q+ubQDgHshP/d9v9/8gv7FU//sN3izT/9j3icvqHUCUbm3af9rTfWNEv8IsDN2A+w0lEJatGzJc7yUKROE4ncVQMyihtX9CfHCHac0sZBrwNd3r6ive8qbhMw3P4RTmUSBumLueymB5qYABcOv5Sk9/pOY6xtgC/u3pvjfQ0avj4pj7NLPTwbMf8Vf6PaXty0564545HDxdUPWYW/8SHAGYsGHXs/9PAx5Vfu8Lq3q3VICTar/Q0HvX0QvOAXNWFio++79b9JP6ZVLMybPuCQzcR9vEDb1l5t7DVFPvXwAT0E01jcpBs/SSKfrwYNlqNuljcCaFAeX4OqqvSVT1ZTFjzBe7OcLfaY79SMpfyLmiKQe6uoP5mMZI+N3t/UVOQFLeExKpaLXVGJ/rE5vdOk3HPT5VnFRWMaS+5agnVJBUGfiNWwX9UZ/MFP/xi1tLAluf7Qf+fSZX/ZwOSBrLPHHDJhXRPEb3iJGai9FcPBlVQkCvJgtcPOC8COeQ+tr2jwg8fLGgUam536AO1YCHU+ukw60TaEcWuXeyAAAAAAA=="
+    },
+    "isOneTime": true,
+    "monthlyDollars": 5,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$5 one time",
+    "createdAt": "2025-08-03T15:34:53Z",
+    "provider": "github"
+  },
+  {
+    "sponsor": {
       "login": "ixahmedxi",
       "name": "Ahmed Elsakaan",
       "avatarUrl": "https://avatars.githubusercontent.com/u/20271968?u=ab95f47bb661569e9b4ab1dadfdb802b77f9d1c6&v=4",
