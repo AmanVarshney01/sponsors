@@ -4,11 +4,20 @@ import { execSync } from "child_process";
 import { createInterface } from "readline";
 
 const BUCKET_NAME = "sponsors";
-const SOURCE_DIR = join(__dirname, "sponsorkit");
+const SOURCE_DIR = join(process.cwd(), "sponsorkit");
 const SPONSORS_JSON = join(SOURCE_DIR, "sponsors.json");
 const SPONSORS_PNG = join(SOURCE_DIR, "sponsors.png");
 
-// Step 1: Remove avatarBuffer from sponsors.json
+// Step 1: Run sponsorkit with comparison
+console.log("🚀 Running sponsorkit with change tracking...");
+try {
+  execSync("node sponsorkit-enhanced.js", { stdio: "inherit" });
+} catch (err) {
+  console.error("❌ Failed to run sponsorkit comparison:", err);
+  process.exit(1);
+}
+
+// Step 2: Remove avatarBuffer from sponsors.json
 function removeAvatarBuffer(obj) {
   if (Array.isArray(obj)) {
     return obj.map(removeAvatarBuffer);
@@ -53,7 +62,7 @@ cleanedSponsors.push({
   monthlyDollars: 150,
   privacyLevel: "PUBLIC",
   tierName: "$150 one time",
-  createdAt: "2025-06-12T16:37:43Z",
+  createdAt: "2025-07-29T11:38:28Z",
   provider: "github",
 });
 
