@@ -1,24 +1,25 @@
 {
-  "name": "sponsorkit",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "sponsors": "bun upload-sponsorkit-to-r2.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "sponsorkit": "^17.0.0"
-  },
-  "devDependencies": {
-    "wrangler": "^4.33.1",
-    "@types/bun": "^1.2.21"
-  },
-  "private": true,
-  "peerDependencies": {
-    "typescript": "^5.9.2"
-  }
+	"name": "sponsorkit",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"sponsors": "bun scripts/upload-sponsorkit-to-r2.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"@vercel/og": "^0.8.5",
+		"satori": "^0.18.1"
+	},
+	"devDependencies": {
+		"wrangler": "^4.33.1",
+		"@types/bun": "^1.2.21"
+	},
+	"private": true,
+	"peerDependencies": {
+		"typescript": "^5.9.2"
+	}
 }
