@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-08-30T11:41:35.095Z",
+  "generated_at": "2025-08-30T12:13:52.076Z",
   "summary": {
     "total_sponsors": 33,
     "total_lifetime_amount": 1729.23,
@@ -16,366 +16,316 @@
     {
       "name": "Steven Tey",
       "githubId": "steven-tey",
-      "avatarUrl": "https://avatars.githubusercontent.com/steven-tey",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/28986134?v=4",
+      "websiteUrl": "steventey.com",
       "githubUrl": "https://github.com/steven-tey",
       "tierName": "$421 one time",
-      "totalProcessedAmount": 421,
       "sinceWhen": "since Jun 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$421.00"
+      "transactionCount": 1
     },
     {
       "name": "Felipe Valencia",
       "githubId": "felipeva",
-      "avatarUrl": "https://avatars.githubusercontent.com/felipeva",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/4754195?v=4",
+      "websiteUrl": "https://felipeva.com",
       "githubUrl": "https://github.com/felipeva",
       "tierName": "$100 one time",
-      "totalProcessedAmount": 220,
       "sinceWhen": "since Aug 2025",
       "transactionCount": 4,
+      "totalProcessedAmount": 220,
       "formattedAmount": "$220.00"
     },
     {
       "name": "Brandon McConnell",
       "githubId": "brandonmcconnell",
-      "avatarUrl": "https://avatars.githubusercontent.com/brandonmcconnell",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/5913254?v=4",
+      "websiteUrl": "https://codepen.io/brandonmcconnell",
       "githubUrl": "https://github.com/brandonmcconnell",
       "tierName": "$100 one time",
-      "totalProcessedAmount": 173.84,
       "sinceWhen": "since Jun 2025",
       "transactionCount": 3,
+      "totalProcessedAmount": 173.84,
       "formattedAmount": "$173.84"
     },
     {
       "name": "vibecode",
       "githubId": "vibecode",
-      "avatarUrl": "https://avatars.githubusercontent.com/vibecode",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/199843497?v=4",
+      "websiteUrl": "https://www.vibecodeapp.com",
       "githubUrl": "https://github.com/vibecode",
       "tierName": "$100 one time",
-      "totalProcessedAmount": 100,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$100.00"
+      "transactionCount": 1
     },
     {
       "name": "Clerk",
       "githubId": "clerkinc",
-      "avatarUrl": "https://avatars.githubusercontent.com/clerkinc",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/149761669?v=4",
+      "websiteUrl": "https://github.com/clerk",
       "githubUrl": "https://github.com/clerkinc",
       "tierName": "$100 a month",
-      "totalProcessedAmount": 100,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$100.00"
+      "transactionCount": 1
     },
     {
       "name": "marckeelingiv",
       "githubId": "marckeelingiv",
-      "avatarUrl": "https://avatars.githubusercontent.com/marckeelingiv",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/32782256?v=4",
+      "websiteUrl": "www.marckeelingiv.com",
       "githubUrl": "https://github.com/marckeelingiv",
       "tierName": "$100 one time",
-      "totalProcessedAmount": 100,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$100.00"
+      "transactionCount": 1
     },
     {
       "name": "Novu",
       "githubId": "novuhq",
-      "avatarUrl": "https://avatars.githubusercontent.com/novuhq",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/77433905?v=4",
+      "websiteUrl": "https://go.novu.co/github",
       "githubUrl": "https://github.com/novuhq",
       "tierName": "$100 a month",
-      "totalProcessedAmount": 90.32,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$90.32"
+      "transactionCount": 1
     }
   ],
   "sponsors": [
     {
       "name": "Bapusaheb Patil",
       "githubId": "bapspatil",
-      "avatarUrl": "https://avatars.githubusercontent.com/bapspatil",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/16699418?v=4",
+      "websiteUrl": "https://www.bapspatil.com",
       "githubUrl": "https://github.com/bapspatil",
       "tierName": "$20 a month",
-      "totalProcessedAmount": 120,
       "sinceWhen": "since May 2025",
       "transactionCount": 6,
+      "totalProcessedAmount": 120,
       "formattedAmount": "$120.00"
     },
     {
       "name": "Ahmed Elsakaan",
       "githubId": "ixahmedxi",
-      "avatarUrl": "https://avatars.githubusercontent.com/ixahmedxi",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/20271968?v=4",
+      "websiteUrl": "https://elsakaan.dev",
       "githubUrl": "https://github.com/ixahmedxi",
       "tierName": "$5 a month",
-      "totalProcessedAmount": 49.64,
       "sinceWhen": "since May 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$49.64"
+      "transactionCount": 1
     },
     {
       "name": "Ali Hussein",
       "githubId": "Ali-Hussein-dev",
-      "avatarUrl": "https://avatars.githubusercontent.com/Ali-Hussein-dev",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/42802922?v=4",
+      "websiteUrl": "https://ali-hussein.com",
       "githubUrl": "https://github.com/Ali-Hussein-dev",
       "tierName": "$5 a month",
-      "totalProcessedAmount": 10.5,
       "sinceWhen": "since Jul 2025",
       "transactionCount": 3,
+      "totalProcessedAmount": 10.5,
       "formattedAmount": "$10.50"
     },
     {
       "name": "Yassir Touab",
       "githubId": "yassirtouab",
-      "avatarUrl": "https://avatars.githubusercontent.com/yassirtouab",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/26269747?v=4",
+      "websiteUrl": "https://yassirtouab.com/",
       "githubUrl": "https://github.com/yassirtouab",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "Avraj",
       "githubId": "notunderctrl",
-      "avatarUrl": "https://avatars.githubusercontent.com/notunderctrl",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/119873044?v=4",
+      "websiteUrl": "underctrl.io",
       "githubUrl": "https://github.com/notunderctrl",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "Elber",
       "githubId": "elberrd",
-      "avatarUrl": "https://avatars.githubusercontent.com/elberrd",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/8150723?v=4",
       "websiteUrl": null,
       "githubUrl": "https://github.com/elberrd",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "Mohit Yadav",
       "githubId": "Just-Moh-it",
-      "avatarUrl": "https://avatars.githubusercontent.com/Just-Moh-it",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/48997634?v=4",
+      "websiteUrl": "https://mohitya.dev",
       "githubUrl": "https://github.com/Just-Moh-it",
       "tierName": "$6 a month",
-      "totalProcessedAmount": 8.32,
       "sinceWhen": "since Jul 2025",
       "transactionCount": 2,
+      "totalProcessedAmount": 8.32,
       "formattedAmount": "$8.32"
     },
     {
       "name": "Mateus Santana",
       "githubId": "mateussmohamed",
-      "avatarUrl": "https://avatars.githubusercontent.com/mateussmohamed",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/12900896?v=4",
       "websiteUrl": null,
       "githubUrl": "https://github.com/mateussmohamed",
       "tierName": "$5 one time",
-      "totalProcessedAmount": 5,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$5.00"
+      "transactionCount": 1
     },
     {
       "name": "Yannick Seeger",
       "githubId": "yk-sgr",
-      "avatarUrl": "https://avatars.githubusercontent.com/yk-sgr",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/24418343?v=4",
+      "websiteUrl": "https://yseeger.me",
       "githubUrl": "https://github.com/yk-sgr",
       "tierName": "$5 one time",
-      "totalProcessedAmount": 5,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$5.00"
+      "transactionCount": 1
     },
     {
       "name": "judikael bellance",
       "githubId": "jud3v2",
-      "avatarUrl": "https://avatars.githubusercontent.com/jud3v2",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/124008177?v=4",
+      "websiteUrl": "agency.jud3v.fr",
       "githubUrl": "https://github.com/jud3v2",
       "tierName": "$5 one time",
-      "totalProcessedAmount": 5,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$5.00"
+      "transactionCount": 1
     },
     {
       "name": "tn-py",
       "githubId": "tn-py",
-      "avatarUrl": "https://avatars.githubusercontent.com/tn-py",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/20176849?v=4",
+      "websiteUrl": "https://tirsonavarro.dev",
       "githubUrl": "https://github.com/tn-py",
       "tierName": "$1 a month",
-      "totalProcessedAmount": 0.61,
       "sinceWhen": "since Aug 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$0.61"
+      "transactionCount": 1
     }
   ],
   "pastSponsors": [
     {
       "name": "Better Stack Community",
       "githubId": "betterstack-community",
-      "avatarUrl": "https://avatars.githubusercontent.com/betterstack-community",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/100779253?v=4",
+      "websiteUrl": "https://betterstack.com/community",
       "githubUrl": "https://github.com/betterstack-community",
       "tierName": "$100 one time",
-      "totalProcessedAmount": 100,
       "sinceWhen": "since Jul 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$100.00"
+      "transactionCount": 1
     },
     {
       "name": "Cameron Pak",
       "githubId": "cameronapak",
-      "avatarUrl": "https://avatars.githubusercontent.com/cameronapak",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/35306616?v=4",
+      "websiteUrl": "https://cameronpak.com",
       "githubUrl": "https://github.com/cameronapak",
       "tierName": "$50 one time",
-      "totalProcessedAmount": 50,
       "sinceWhen": "since May 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$50.00"
+      "transactionCount": 1
     },
     {
       "name": "Philip Yong",
       "githubId": "philipyong",
-      "avatarUrl": "https://avatars.githubusercontent.com/philipyong",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/47465937?v=4",
+      "websiteUrl": "philipyong.com",
       "githubUrl": "https://github.com/philipyong",
       "tierName": "$20 one time",
-      "totalProcessedAmount": 20,
       "sinceWhen": "since Jun 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$20.00"
+      "transactionCount": 1
     },
     {
       "name": "Guilherme Barros",
       "githubId": "gbarros-dev",
-      "avatarUrl": "https://avatars.githubusercontent.com/gbarros-dev",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/58117294?v=4",
       "websiteUrl": null,
       "githubUrl": "https://github.com/gbarros-dev",
       "tierName": "$20 a month",
-      "totalProcessedAmount": 20,
       "sinceWhen": "since May 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$20.00"
+      "transactionCount": 1
     },
     {
       "name": "Alexander Swensen",
       "githubId": "AlexSwensen",
-      "avatarUrl": "https://avatars.githubusercontent.com/AlexSwensen",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/7460917?v=4",
+      "websiteUrl": "https://alexswensen.io",
       "githubUrl": "https://github.com/AlexSwensen",
       "tierName": "$20 one time",
-      "totalProcessedAmount": 20,
       "sinceWhen": "since May 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$20.00"
+      "transactionCount": 1
     },
     {
       "name": "Mup",
       "githubId": "muperdev",
-      "avatarUrl": "https://avatars.githubusercontent.com/muperdev",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/85489543?v=4",
       "websiteUrl": null,
       "githubUrl": "https://github.com/muperdev",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since Jul 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "javayhu",
       "githubId": "javayhu",
-      "avatarUrl": "https://avatars.githubusercontent.com/javayhu",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1982582?v=4",
+      "websiteUrl": "https://MkSaaS.com",
       "githubUrl": "https://github.com/javayhu",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since Jul 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "Insik Han",
       "githubId": "Insik-Han",
-      "avatarUrl": "https://avatars.githubusercontent.com/Insik-Han",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/63291908?v=4",
       "websiteUrl": null,
       "githubUrl": "https://github.com/Insik-Han",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since Jun 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "Nick",
       "githubId": "nicolasguzca",
-      "avatarUrl": "https://avatars.githubusercontent.com/nicolasguzca",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/5486518?v=4",
+      "websiteUrl": "nickg.dev",
       "githubUrl": "https://github.com/nicolasguzca",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since Jun 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "Igor Belogurov",
       "githubId": "bibblebabl",
-      "avatarUrl": "https://avatars.githubusercontent.com/bibblebabl",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/9008978?v=4",
       "websiteUrl": null,
       "githubUrl": "https://github.com/bibblebabl",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since May 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "Vadim Rusin",
       "githubId": "thevrus",
-      "avatarUrl": "https://avatars.githubusercontent.com/thevrus",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/25208437?v=4",
+      "websiteUrl": "https://www.rusin.app/",
       "githubUrl": "https://github.com/thevrus",
       "tierName": "$10 one time",
-      "totalProcessedAmount": 10,
       "sinceWhen": "since May 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$10.00"
+      "transactionCount": 1
     },
     {
       "name": "Piotr Kulpinski",
       "githubId": "piotrkulpinski",
-      "avatarUrl": "https://avatars.githubusercontent.com/piotrkulpinski",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/358412?v=4",
+      "websiteUrl": "https://dirstarter.com",
       "githubUrl": "https://github.com/piotrkulpinski",
       "tierName": "$5 one time",
-      "totalProcessedAmount": 5,
       "sinceWhen": "since Jul 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$5.00"
+      "transactionCount": 1
     },
     {
       "name": "feelswtc",
@@ -384,34 +334,28 @@
       "websiteUrl": null,
       "githubUrl": "https://github.com/feelswtc",
       "tierName": "$5 one time",
-      "totalProcessedAmount": 5,
       "sinceWhen": "since Jul 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$5.00"
+      "transactionCount": 1
     },
     {
       "name": "melodyclue",
       "githubId": "melodyclue",
-      "avatarUrl": "https://avatars.githubusercontent.com/melodyclue",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/117662771?v=4",
+      "websiteUrl": "https://literal.at",
       "githubUrl": "https://github.com/melodyclue",
       "tierName": "$5 one time",
-      "totalProcessedAmount": 5,
       "sinceWhen": "since May 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$5.00"
+      "transactionCount": 1
     },
     {
       "name": "Neville Brem",
       "githubId": "nevthereal",
-      "avatarUrl": "https://avatars.githubusercontent.com/nevthereal",
-      "websiteUrl": null,
+      "avatarUrl": "https://avatars.githubusercontent.com/u/81911421?v=4",
+      "websiteUrl": "nevillebrem.com",
       "githubUrl": "https://github.com/nevthereal",
       "tierName": "$5 one time",
-      "totalProcessedAmount": 5,
       "sinceWhen": "since Apr 2025",
-      "transactionCount": 1,
-      "formattedAmount": "$5.00"
+      "transactionCount": 1
     }
   ]
 }

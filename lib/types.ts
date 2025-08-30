@@ -28,7 +28,7 @@ export interface ProcessedSponsor {
 		login: string;
 		name: string;
 		avatarUrl: string;
-		websiteUrl?: string;
+		websiteUrl?: string | null;
 		linkUrl: string;
 		customLogoUrl?: string;
 		type: string;

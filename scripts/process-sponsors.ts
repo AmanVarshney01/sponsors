@@ -15,6 +15,15 @@ import {
 	getRelativeTime
 } from "../lib/utils.js";
 
+interface GitHubUser {
+	login: string;
+	name: string | null;
+	blog: string | null;
+	html_url: string;
+	avatar_url: string;
+	type: string;
+}
+
 const SOURCE_DIR: string = process.cwd();
 const GITHUB_EXPORT_FILE: string = join(
 	SOURCE_DIR,
@@ -22,13 +31,56 @@ const GITHUB_EXPORT_FILE: string = join(
 );
 const OUTPUT_SPONSORS_JSON: string = join(SOURCE_DIR, "generated", "sponsors.json");
 
+// GitHub API configuration
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_API_BASE = "https://api.github.com";
+
 const args: string[] = process.argv.slice(2);
 const autoYes: boolean = args.includes("--yes") || args.includes("-y");
 
+async function fetchGitHubUser(username: string, hasShownTokenWarning: { value: boolean }): Promise<GitHubUser | null> {
+	if (!GITHUB_TOKEN) {
+		if (!hasShownTokenWarning.value) {
+			console.warn(`⚠️  No GitHub token found. Set GITHUB_TOKEN environment variable to fetch website URLs.`);
+			hasShownTokenWarning.value = true;
+		}
+		return null;
+	}
+
+	try {
+		const response = await fetch(`${GITHUB_API_BASE}/users/${username}`, {
+			headers: {
+				'Authorization': `token ${GITHUB_TOKEN}`,
+				'Accept': 'application/vnd.github.v3+json',
+				'User-Agent': 'sponsorkit/1.0.0'
+			}
+		});
+
+		if (!response.ok) {
+			if (response.status === 404) {
+				console.warn(`⚠️  User ${username} not found on GitHub`);
+				return null;
+			}
+			if (response.status === 403) {
+				console.warn(`⚠️  GitHub API rate limit exceeded or token invalid`);
+				return null;
+			}
+			throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+		}
+
+		const user = await response.json() as GitHubUser;
+		return user;
+	} catch (error) {
+		console.error(`❌ Failed to fetch GitHub user ${username}:`, error);
+		return null;
+	}
+}
 
 
-function processSponsorData(rawSponsors: RawSponsor[]): ProcessedSponsor[] {
+
+async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedSponsor[]> {
 	const validSponsors: ProcessedSponsor[] = [];
+	let hasShownTokenWarning = false;
 
 	for (const sponsor of rawSponsors) {
 		if (!sponsor.is_public) continue;
@@ -138,16 +190,23 @@ function processSponsorData(rawSponsors: RawSponsor[]): ProcessedSponsor[] {
 		const displayName =
 			sponsor.sponsor_profile_name || sponsor.sponsor_handle;
 
+		// Fetch GitHub user data for website URL
+		const githubUser = await fetchGitHubUser(sponsor.sponsor_handle, { value: hasShownTokenWarning });
+		const websiteUrl = githubUser?.blog || null;
+		
+		// Add small delay to respect GitHub API rate limits
+		await new Promise(resolve => setTimeout(resolve, 100));
+
 		validSponsors.push({
-			sponsor: {
-				login: sponsor.sponsor_handle,
-				name: displayName,
-				avatarUrl: `https://avatars.githubusercontent.com/${sponsor.sponsor_handle}`,
-				websiteUrl: undefined,
-				linkUrl: `https://github.com/${sponsor.sponsor_handle}`,
-				customLogoUrl: undefined,
-				type: "User",
-			},
+					sponsor: {
+			login: sponsor.sponsor_handle,
+			name: githubUser?.name || displayName,
+			avatarUrl: githubUser?.avatar_url || `https://avatars.githubusercontent.com/${sponsor.sponsor_handle}`,
+			websiteUrl,
+			linkUrl: githubUser?.html_url || `https://github.com/${sponsor.sponsor_handle}`,
+			customLogoUrl: undefined,
+			type: githubUser?.type || "User",
+		},
 			// Core sponsorship data
 			totalLifetimeAmount,
 			currentMonthlyAmount,
@@ -207,19 +266,29 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 	};
 
 	// Helper function to format sponsor data for UI
-	const formatSponsorForUI = (sponsor: ProcessedSponsor) => ({
-		name: sponsor.sponsor.name,
-		githubId: sponsor.sponsor.login,
-		avatarUrl: sponsor.sponsor.avatarUrl,
-		websiteUrl: sponsor.sponsor.websiteUrl || null,
-		githubUrl: sponsor.sponsor.linkUrl,
-		tierName: sponsor.tierName,
-		totalProcessedAmount: sponsor.totalLifetimeAmount,
-		sinceWhen: formatSinceWhen(sponsor.firstSponsorshipDate),
-		transactionCount: sponsor.transactionCount,
-		// Additional metadata for UI
-		formattedAmount: formatAmount(sponsor.totalLifetimeAmount),
-	});
+	const formatSponsorForUI = (sponsor: ProcessedSponsor) => {
+		const baseData = {
+			name: sponsor.sponsor.name,
+			githubId: sponsor.sponsor.login,
+			avatarUrl: sponsor.sponsor.avatarUrl,
+			websiteUrl: sponsor.sponsor.websiteUrl,
+			githubUrl: sponsor.sponsor.linkUrl,
+			tierName: sponsor.tierName,
+			sinceWhen: formatSinceWhen(sponsor.firstSponsorshipDate),
+			transactionCount: sponsor.transactionCount,
+		};
+
+		// Only include total amount fields for sponsors with multiple transactions
+		if (sponsor.transactionCount > 1) {
+			return {
+				...baseData,
+				totalProcessedAmount: sponsor.totalLifetimeAmount,
+				formattedAmount: formatAmount(sponsor.totalLifetimeAmount),
+			};
+		}
+
+		return baseData;
+	};
 
 	// Create output structure optimized for UI
 	const output = {
@@ -325,7 +394,7 @@ async function main(): Promise<void> {
 		console.log(`📊 Found ${rawData.length} total sponsorship records`);
 
 		// Process sponsor data
-		const processedSponsors = processSponsorData(rawData);
+		const processedSponsors = await processSponsorData(rawData);
 		console.log(
 			`✨ Processed ${processedSponsors.length} public sponsors with valid transactions`,
 		);
