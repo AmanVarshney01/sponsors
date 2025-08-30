@@ -4,17 +4,21 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "sponsorkit": "node sponsorkit-enhanced.js",
-    "update-sponsors": "bun upload-sponsorkit-to-r2.js"
+    "sponsors": "bun upload-sponsorkit-to-r2.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "sponsorkit": "^16.5.0"
+    "sponsorkit": "^17.0.0"
   },
   "devDependencies": {
-    "wrangler": "^4.25.0"
+    "wrangler": "^4.33.1",
+    "@types/bun": "^1.2.21"
+  },
+  "private": true,
+  "peerDependencies": {
+    "typescript": "^5.9.2"
   }
 }

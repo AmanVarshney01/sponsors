@@ -294,7 +294,7 @@
       "type": "User"
     },
     "isOneTime": true,
-    "monthlyDollars": 5,
+    "monthlyDollars": -1,
     "privacyLevel": "PUBLIC",
     "tierName": "$5 one time",
     "createdAt": "2025-07-24T12:45:27Z",
@@ -310,7 +310,7 @@
       "type": "Organization"
     },
     "isOneTime": true,
-    "monthlyDollars": 100,
+    "monthlyDollars": -1,
     "privacyLevel": "PUBLIC",
     "tierName": "$100 one time",
     "createdAt": "2025-07-29T11:38:28Z",
@@ -325,7 +325,7 @@
       "type": "User"
     },
     "isOneTime": true,
-    "monthlyDollars": 10,
+    "monthlyDollars": -1,
     "privacyLevel": "PUBLIC",
     "tierName": "$10 one time",
     "createdAt": "2025-07-30T08:28:26Z",
@@ -476,9 +476,40 @@
   },
   {
     "sponsor": {
+      "login": "mateussmohamed",
+      "name": "Mateus Santana",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/12900896?u=4c3db47a2411b00e19f9037d7e3c35083447e035&v=4",
+      "linkUrl": "https://github.com/mateussmohamed",
+      "type": "User"
+    },
+    "isOneTime": true,
+    "monthlyDollars": 5,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$5 one time",
+    "createdAt": "2025-08-29T13:24:17Z",
+    "provider": "github"
+  },
+  {
+    "sponsor": {
+      "login": "vibecode",
+      "name": "vibecode",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/199843497?v=4",
+      "websiteUrl": "https://vibecodeapp.com",
+      "linkUrl": "https://github.com/vibecode",
+      "type": "Organization"
+    },
+    "isOneTime": true,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$100 one time",
+    "createdAt": "2025-08-30T05:25:32Z",
+    "provider": "github"
+  },
+  {
+    "sponsor": {
       "login": "brandonmcconnell",
       "name": "Brandon McConnell",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/5913254?u=50b053e50a75f2f4b320a9b5cd0173ce16e379fe&v=4",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/5913254?v=4",
       "websiteUrl": "https://codepen.io/brandonmcconnell",
       "linkUrl": "https://github.com/brandonmcconnell",
       "type": "User"

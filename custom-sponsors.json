@@ -1,0 +1,18 @@
+[
+  {
+    "sponsor": {
+      "login": "brandonmcconnell",
+      "name": "Brandon McConnell",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/5913254?v=4",
+      "websiteUrl": "https://codepen.io/brandonmcconnell",
+      "linkUrl": "https://github.com/brandonmcconnell",
+      "type": "User"
+    },
+    "isOneTime": false,
+    "monthlyDollars": 150,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$150 one time",
+    "createdAt": "2025-07-29T11:38:28Z",
+    "provider": "github"
+  }
+]
