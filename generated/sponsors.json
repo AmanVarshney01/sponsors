@@ -1,12 +1,13 @@
 {
-  "generated_at": "2025-08-30T12:13:52.076Z",
+  "generated_at": "2025-09-02T06:28:44.477Z",
   "summary": {
     "total_sponsors": 33,
     "total_lifetime_amount": 1729.23,
     "total_current_monthly": 242,
     "special_sponsors": 7,
-    "current_sponsors": 11,
-    "past_sponsors": 15,
+    "current_sponsors": 9,
+    "past_sponsors": 16,
+    "backers": 1,
     "top_sponsor": {
       "name": "Steven Tey",
       "amount": 421
@@ -184,26 +185,6 @@
       "tierName": "$5 one time",
       "sinceWhen": "since Aug 2025",
       "transactionCount": 1
-    },
-    {
-      "name": "judikael bellance",
-      "githubId": "jud3v2",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/124008177?v=4",
-      "websiteUrl": "agency.jud3v.fr",
-      "githubUrl": "https://github.com/jud3v2",
-      "tierName": "$5 one time",
-      "sinceWhen": "since Aug 2025",
-      "transactionCount": 1
-    },
-    {
-      "name": "tn-py",
-      "githubId": "tn-py",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/20176849?v=4",
-      "websiteUrl": "https://tirsonavarro.dev",
-      "githubUrl": "https://github.com/tn-py",
-      "tierName": "$1 a month",
-      "sinceWhen": "since Aug 2025",
-      "transactionCount": 1
     }
   ],
   "pastSponsors": [
@@ -318,6 +299,16 @@
       "transactionCount": 1
     },
     {
+      "name": "judikael bellance",
+      "githubId": "jud3v2",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/124008177?v=4",
+      "websiteUrl": "agency.jud3v.fr",
+      "githubUrl": "https://github.com/jud3v2",
+      "tierName": "$5 one time",
+      "sinceWhen": "since Aug 2025",
+      "transactionCount": 1
+    },
+    {
       "name": "Piotr Kulpinski",
       "githubId": "piotrkulpinski",
       "avatarUrl": "https://avatars.githubusercontent.com/u/358412?v=4",
@@ -355,6 +346,18 @@
       "githubUrl": "https://github.com/nevthereal",
       "tierName": "$5 one time",
       "sinceWhen": "since Apr 2025",
+      "transactionCount": 1
+    }
+  ],
+  "backers": [
+    {
+      "name": "tn-py",
+      "githubId": "tn-py",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/20176849?v=4",
+      "websiteUrl": "https://tirsonavarro.dev",
+      "githubUrl": "https://github.com/tn-py",
+      "tierName": "$1 a month",
+      "sinceWhen": "since Aug 2025",
       "transactionCount": 1
     }
   ]

@@ -11,6 +11,7 @@ import {
 	filterSpecialSponsors,
 	filterCurrentSponsors,
 	filterPastSponsors,
+	filterBackers,
 	sortSponsors,
 	getRelativeTime
 } from "../lib/utils.js";
@@ -152,22 +153,30 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 			const activeThreshold = isYearlySponsor ? 365 : 60;
 			isCurrentlyActive = daysSinceLastTransaction <= activeThreshold;
 		}
-		let category: "special" | "current" | "past";
+		let category: "special" | "current" | "past" | "backers";
 		
 		if (!hasAnyRecurringTiers) {
 			if (totalLifetimeAmount >= 400 || (totalLifetimeAmount >= 100 && daysSinceLastTransaction <= 30)) {
 				category = "special";
-			} else if (daysSinceLastTransaction <= 30) {
+			} else if (totalLifetimeAmount >= 5) {
+				if (daysSinceLastTransaction <= 30) {
+					category = "current";
+				} else {
+					category = "past";
+				}
+			} else {
+				category = "backers";
+			}
+		} else if (highestTierAmount >= 100) {
+			category = "special";
+		} else if (highestTierAmount >= 5) {
+			if (isCurrentlyActive) {
 				category = "current";
 			} else {
 				category = "past";
 			}
-		} else if (highestTierAmount >= 100) {
-			category = "special";
-		} else if (isCurrentlyActive) {
-			category = "current";
 		} else {
-			category = "past";
+			category = "backers";
 		}
 		const allTierNames = Array.from(
 			new Set(validTransactions.map((t) => t.tier_name)),
@@ -246,6 +255,7 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 	const specialSponsors = filterSpecialSponsors(sponsors);
 	const currentSponsors = filterCurrentSponsors(sponsors);
 	const pastSponsors = filterPastSponsors(sponsors);
+	const backers = filterBackers(sponsors);
 
 	const totalAmount = sponsors.reduce(
 		(sum, s) => sum + s.totalLifetimeAmount,
@@ -301,6 +311,7 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 			special_sponsors: specialSponsors.length,
 			current_sponsors: currentSponsors.length,
 			past_sponsors: pastSponsors.length,
+			backers: backers.length,
 			top_sponsor:
 				sponsors.length > 0
 					? {
@@ -314,6 +325,7 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 		specialSponsors: specialSponsors.map(formatSponsorForUI),
 		sponsors: currentSponsors.map(formatSponsorForUI),
 		pastSponsors: pastSponsors.map(formatSponsorForUI),
+		backers: backers.map(formatSponsorForUI),
 
 
 	};
@@ -333,6 +345,7 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 	);
 	console.log(`   • Current sponsors: ${currentSponsors.length}`);
 	console.log(`   • Past sponsors: ${pastSponsors.length}`);
+	console.log(`   • Backers ($0 to <$5): ${backers.length}`);
 	console.log(`   • Total lifetime amount: ${formatAmount(totalAmount)}`);
 	console.log(
 		`   • Current monthly recurring: ${formatAmount(totalMonthlyAmount)}`,

@@ -86,6 +86,10 @@ export function filterPastSponsors(sponsors: ProcessedSponsor[]): ProcessedSpons
 	return sponsors.filter((sponsor) => sponsor.category === "past");
 }
 
+export function filterBackers(sponsors: ProcessedSponsor[]): ProcessedSponsor[] {
+	return sponsors.filter((sponsor) => sponsor.category === "backers");
+}
+
 export function filterSpecialSponsors(sponsors: ProcessedSponsor[]): ProcessedSponsor[] {
 	return sponsors.filter((sponsor) => sponsor.category === "special");
 }
@@ -111,8 +115,8 @@ export function sortSpecialSponsors(sponsors: ProcessedSponsor[]): ProcessedSpon
 
 export function sortSponsors(sponsors: ProcessedSponsor[]): ProcessedSponsor[] {
 	return [...sponsors].sort((a, b) => {
-		// First, sort by category (special > current > past)
-		const categoryOrder = { special: 0, current: 1, past: 2 };
+		// First, sort by category (special > current > backers > past)
+		const categoryOrder = { special: 0, current: 1, backers: 2, past: 3 };
 		if (a.category !== b.category) {
 			return categoryOrder[a.category] - categoryOrder[b.category];
 		}

@@ -45,7 +45,7 @@ export interface ProcessedSponsor {
 	tierName: string;
 	isCurrentlyActive: boolean;
 	daysSinceLastTransaction: number;
-	category: "special" | "current" | "past";
+	category: "special" | "current" | "past" | "backers";
 	privacyLevel: string;
 	createdAt: string;
 	provider: string;
@@ -63,6 +63,7 @@ export interface SponsorsData {
 		special_sponsors: number;
 		current_sponsors: number;
 		past_sponsors: number;
+		backers: number;
 		top_sponsor: {
 			name: string;
 			amount: number;
@@ -72,6 +73,7 @@ export interface SponsorsData {
 		special: ProcessedSponsor[];
 		current: ProcessedSponsor[];
 		past: ProcessedSponsor[];
+		backers: ProcessedSponsor[];
 	};
 	sponsors: ProcessedSponsor[];
 }
