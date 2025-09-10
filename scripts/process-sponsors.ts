@@ -3,10 +3,10 @@
 import { existsSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import type { ProcessedSponsor, RawSponsor, SponsorsData } from "../lib/types.js";
-import { 
-	parseAmount, 
-	formatAmount, 
-	getCountryName, 
+import {
+	parseAmount,
+	formatAmount,
+	getCountryName,
 	isRecurringTier,
 	filterSpecialSponsors,
 	filterCurrentSponsors,
@@ -106,10 +106,10 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 		const hasRecurringTiers = recurringTransactions.length > 0;
 		const recurringTierAmount = hasRecurringTiers
 			? Math.max(
-					...recurringTransactions.map((t) =>
-						parseAmount(t.tier_monthly_amount),
-					),
-				)
+				...recurringTransactions.map((t) =>
+					parseAmount(t.tier_monthly_amount),
+				),
+			)
 			: 0;
 
 		// Current monthly amount (latest recurring tier or 0)
@@ -138,13 +138,13 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 
 		const daysSinceLastTransaction = Math.floor(
 			(Date.now() - new Date(latestTransactionDate).getTime()) /
-				(1000 * 60 * 60 * 24),
+			(1000 * 60 * 60 * 24),
 		);
-		
+
 		const hasAnyRecurringTiers = validTransactions.some((t) =>
 			isRecurringTier(t.tier_name),
 		);
-		
+
 		let isCurrentlyActive: boolean;
 		if (!hasAnyRecurringTiers) {
 			isCurrentlyActive = false;
@@ -154,7 +154,7 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 			isCurrentlyActive = daysSinceLastTransaction <= activeThreshold;
 		}
 		let category: "special" | "current" | "past" | "backers";
-		
+
 		if (!hasAnyRecurringTiers) {
 			if (totalLifetimeAmount >= 400 || (totalLifetimeAmount >= 100 && daysSinceLastTransaction <= 30)) {
 				category = "special";
@@ -167,25 +167,43 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 			} else {
 				category = "backers";
 			}
-		} else if (highestTierAmount >= 100) {
-			category = "special";
-		} else if (highestTierAmount >= 5) {
-			if (isCurrentlyActive) {
-				category = "current";
-			} else {
-				category = "past";
-			}
 		} else {
-			category = "backers";
+			// For sponsors with recurring tiers, prioritize current active status over highest tier amount
+			if (isCurrentlyActive && currentMonthlyAmount >= 5) {
+				// If currently active with $5+ monthly, check if they should be special based on current tier
+				if (currentMonthlyAmount >= 100) {
+					category = "special";
+				} else {
+					category = "current";
+				}
+			} else if (highestTierAmount >= 100) {
+				// Only put in special if not currently active or if current monthly is also $100+
+				category = "special";
+			} else if (highestTierAmount >= 5) {
+				if (isCurrentlyActive) {
+					category = "current";
+				} else {
+					category = "past";
+				}
+			} else {
+				category = "backers";
+			}
 		}
 		const allTierNames = Array.from(
 			new Set(validTransactions.map((t) => t.tier_name)),
 		);
-		const primaryTier = validTransactions.sort(
-			(a, b) =>
-				parseAmount(b.tier_monthly_amount) -
-				parseAmount(a.tier_monthly_amount),
-		)[0];
+		// For currently active sponsors, use their current recurring tier as primary
+		// Otherwise, use the highest tier amount
+		let primaryTier;
+		if (isCurrentlyActive && latestRecurringTier) {
+			primaryTier = latestRecurringTier;
+		} else {
+			primaryTier = validTransactions.sort(
+				(a, b) =>
+					parseAmount(b.tier_monthly_amount) -
+					parseAmount(a.tier_monthly_amount),
+			)[0];
+		}
 
 		// Get countries
 		const countries = Array.from(
@@ -202,20 +220,20 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 		// Fetch GitHub user data for website URL
 		const githubUser = await fetchGitHubUser(sponsor.sponsor_handle, { value: hasShownTokenWarning });
 		const websiteUrl = githubUser?.blog || null;
-		
+
 		// Add small delay to respect GitHub API rate limits
 		await new Promise(resolve => setTimeout(resolve, 100));
 
 		validSponsors.push({
-					sponsor: {
-			login: sponsor.sponsor_handle,
-			name: githubUser?.name || displayName,
-			avatarUrl: githubUser?.avatar_url || `https://avatars.githubusercontent.com/${sponsor.sponsor_handle}`,
-			websiteUrl,
-			linkUrl: githubUser?.html_url || `https://github.com/${sponsor.sponsor_handle}`,
-			customLogoUrl: undefined,
-			type: githubUser?.type || "User",
-		},
+			sponsor: {
+				login: sponsor.sponsor_handle,
+				name: githubUser?.name || displayName,
+				avatarUrl: githubUser?.avatar_url || `https://avatars.githubusercontent.com/${sponsor.sponsor_handle}`,
+				websiteUrl,
+				linkUrl: githubUser?.html_url || `https://github.com/${sponsor.sponsor_handle}`,
+				customLogoUrl: undefined,
+				type: githubUser?.type || "User",
+			},
 			// Core sponsorship data
 			totalLifetimeAmount,
 			currentMonthlyAmount,
@@ -315,9 +333,9 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 			top_sponsor:
 				sponsors.length > 0
 					? {
-							name: sponsors[0]?.sponsor.name || "Unknown",
-							amount: sponsors[0]?.totalLifetimeAmount || 0,
-						}
+						name: sponsors[0]?.sponsor.name || "Unknown",
+						amount: sponsors[0]?.totalLifetimeAmount || 0,
+					}
 					: null,
 		},
 
