@@ -156,7 +156,11 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 		let category: "special" | "current" | "past" | "backers";
 
 		if (!hasAnyRecurringTiers) {
-			if (totalLifetimeAmount >= 400 || (totalLifetimeAmount >= 100 && daysSinceLastTransaction <= 30)) {
+			// Calculate special status duration based on amount: $100 = 1 month, $400 = 4 months, etc.
+			const specialStatusMonths = Math.floor(totalLifetimeAmount / 100);
+			const specialStatusDays = specialStatusMonths * 30; // Approximate 30 days per month
+
+			if (totalLifetimeAmount >= 100 && daysSinceLastTransaction <= specialStatusDays) {
 				category = "special";
 			} else if (totalLifetimeAmount >= 5) {
 				if (daysSinceLastTransaction <= 30) {
