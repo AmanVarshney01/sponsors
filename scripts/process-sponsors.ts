@@ -153,17 +153,36 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 			const activeThreshold = isYearlySponsor ? 365 : 60;
 			isCurrentlyActive = daysSinceLastTransaction <= activeThreshold;
 		}
+
+		// Check for recent one-time donations >= $100
+		const oneTimeTransactions = validTransactions.filter((t) => !isRecurringTier(t.tier_name));
+
+		// Get the most recent one-time transaction date
+		const latestOneTimeTransaction = oneTimeTransactions.sort(
+			(a, b) =>
+				new Date(b.transaction_date).getTime() -
+				new Date(a.transaction_date).getTime(),
+		)[0];
+		const latestOneTimeDate = latestOneTimeTransaction?.transaction_date;
+		const daysSinceLastOneTime = latestOneTimeDate
+			? Math.floor((Date.now() - new Date(latestOneTimeDate).getTime()) / (1000 * 60 * 60 * 24))
+			: Infinity;
+
+		// Calculate total one-time amount and special status duration
+		const totalOneTimeAmount = oneTimeTransactions.reduce((sum, t) => sum + parseAmount(t.processed_amount), 0);
+		const hasRecentLargeOneTime = totalOneTimeAmount >= 100;
+		const specialStatusMonths = Math.floor(totalOneTimeAmount / 100);
+		const specialStatusDays = specialStatusMonths * 30;
+		const isWithinOneTimeSpecialWindow = hasRecentLargeOneTime && daysSinceLastOneTime <= specialStatusDays;
+
 		let category: "special" | "current" | "past" | "backers";
 
 		if (!hasAnyRecurringTiers) {
-			// Calculate special status duration based on amount: $100 = 1 month, $400 = 4 months, etc.
-			const specialStatusMonths = Math.floor(totalLifetimeAmount / 100);
-			const specialStatusDays = specialStatusMonths * 30; // Approximate 30 days per month
-
-			if (totalLifetimeAmount >= 100 && daysSinceLastTransaction <= specialStatusDays) {
+			// Pure one-time sponsors - use daysSinceLastOneTime for fair time windows
+			if (totalLifetimeAmount >= 100 && daysSinceLastOneTime <= specialStatusDays) {
 				category = "special";
 			} else if (totalLifetimeAmount >= 5) {
-				if (daysSinceLastTransaction <= 30) {
+				if (daysSinceLastOneTime <= 30) {
 					category = "current";
 				} else {
 					category = "past";
@@ -172,8 +191,11 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 				category = "backers";
 			}
 		} else {
-			// For sponsors with recurring tiers, prioritize current active status over highest tier amount
-			if (isCurrentlyActive && currentMonthlyAmount >= 5) {
+			// For sponsors with recurring tiers
+			// First check if they have a recent large one-time donation that qualifies for special status
+			if (isWithinOneTimeSpecialWindow) {
+				category = "special";
+			} else if (isCurrentlyActive && currentMonthlyAmount >= 5) {
 				// If currently active with $5+ monthly, check if they should be special based on current tier
 				if (currentMonthlyAmount >= 100) {
 					category = "special";
@@ -196,12 +218,20 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 		const allTierNames = Array.from(
 			new Set(validTransactions.map((t) => t.tier_name)),
 		);
-		// For currently active sponsors, use their current recurring tier as primary
-		// Otherwise, use the highest tier amount
+
+		// Determine which tier to display as primary
 		let primaryTier;
-		if (isCurrentlyActive && latestRecurringTier) {
+
+		// If they're special because of a recent one-time donation, show that
+		if (category === "special" && isWithinOneTimeSpecialWindow && latestOneTimeTransaction) {
+			primaryTier = latestOneTimeTransaction;
+		}
+		// Otherwise, for currently active recurring sponsors, use their current recurring tier
+		else if (isCurrentlyActive && latestRecurringTier) {
 			primaryTier = latestRecurringTier;
-		} else {
+		}
+		// Otherwise, use the highest tier amount
+		else {
 			primaryTier = validTransactions.sort(
 				(a, b) =>
 					parseAmount(b.tier_monthly_amount) -
