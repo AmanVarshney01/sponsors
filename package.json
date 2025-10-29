@@ -12,6 +12,7 @@
 	"description": "",
 	"dependencies": {
 		"@vercel/og": "^0.8.5",
+		"currency.js": "^2.0.4",
 		"satori": "^0.18.1"
 	},
 	"devDependencies": {

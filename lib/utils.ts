@@ -1,11 +1,21 @@
 import type { ProcessedSponsor, RawSponsor, Transaction } from "./types.js";
+import Currency from "currency.js";
 
 export function parseAmount(amountStr: string): number {
-	return parseFloat(amountStr.replace("$", ""));
+	try {
+		// Use currency.js to parse various currency formats
+		// Handles: "$1,000.00", "$100", "1000.50", etc.
+		const currency = Currency(amountStr);
+		return currency.value;
+	} catch (error) {
+		console.warn(`Could not parse amount: ${amountStr}`, error);
+		return 0;
+	}
 }
 
 export function formatAmount(amount: number): string {
-	return `$${amount.toFixed(2)}`;
+	// Use currency.js for consistent formatting
+	return Currency(amount).format();
 }
 
 export function formatAmountShort(amount: number): string {

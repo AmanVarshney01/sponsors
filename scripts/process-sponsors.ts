@@ -177,6 +177,7 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 
 		let category: "special" | "current" | "past" | "backers";
 
+
 		if (!hasAnyRecurringTiers) {
 			// Pure one-time sponsors - use daysSinceLastOneTime for fair time windows
 			if (totalLifetimeAmount >= 100 && daysSinceLastOneTime <= specialStatusDays) {

@@ -1,19 +1,29 @@
 {
-  "generated_at": "2025-10-25T17:28:25.767Z",
+  "generated_at": "2025-10-29T04:14:39.181Z",
   "summary": {
-    "total_sponsors": 45,
-    "total_lifetime_amount": 3424.32,
-    "total_current_monthly": 557,
-    "special_sponsors": 7,
-    "current_sponsors": 8,
+    "total_sponsors": 47,
+    "total_lifetime_amount": 4430.129999999999,
+    "total_current_monthly": 577,
+    "special_sponsors": 8,
+    "current_sponsors": 9,
     "past_sponsors": 29,
     "backers": 1,
     "top_sponsor": {
-      "name": "neondatabase",
-      "amount": 400
+      "name": "Guillermo Rauch",
+      "amount": 1000
     }
   },
   "specialSponsors": [
+    {
+      "name": "Guillermo Rauch",
+      "githubId": "rauchg",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/13041?v=4",
+      "websiteUrl": "http://twitter.com/rauchg",
+      "githubUrl": "https://github.com/rauchg",
+      "tierName": "$1,000 one time",
+      "sinceWhen": "since Oct 2025",
+      "transactionCount": 1
+    },
     {
       "name": "neondatabase",
       "githubId": "neondatabase",
@@ -176,6 +186,16 @@
       "githubUrl": "https://github.com/charanjit-singh",
       "tierName": "$10 one time",
       "sinceWhen": "since Sep 2025",
+      "transactionCount": 1
+    },
+    {
+      "name": "Kiran K",
+      "githubId": "devkiran",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/4593041?v=4",
+      "websiteUrl": "dub.sh/kiran",
+      "githubUrl": "https://github.com/devkiran",
+      "tierName": "$20 a month",
+      "sinceWhen": "since Oct 2025",
       "transactionCount": 1
     },
     {
