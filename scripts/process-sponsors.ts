@@ -86,7 +86,7 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 	// Constants for categorization
 	const SPECIAL_THRESHOLD = 100; // $100+ = special sponsor
 	const NORMAL_MIN_THRESHOLD = 5; // $5+ = normal sponsor
-	const RECURRING_ACTIVE_DAYS = 45; // Consider recurring cancelled if no payment in 45 days
+	const RECURRING_ACTIVE_DAYS = 60; // Consider recurring cancelled if no payment in 60 days
 	const YEARLY_ACTIVE_DAYS = 400; // Yearly sponsors get more leeway
 	const ONE_TIME_CURRENT_DAYS = 30; // One-time donations stay "current" for 30 days
 
