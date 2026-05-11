@@ -4,47 +4,56 @@ Clean GitHub sponsorship data processing and banner generation with intelligent 
 
 ## 🎯 Overview
 
-The system takes raw GitHub sponsorship export data and categorizes sponsors into three tiers:
-- **Special Sponsors** (80px avatars) - High-value supporters
-- **Current Sponsors** (60px avatars) - Active supporters  
+The system takes raw GitHub sponsorship export data and categorizes public supporters into four tiers:
+- **Special Sponsors** (100px avatars) - Active high-value recurring supporters and time-boxed high-value one-time supporters
+- **Current Sponsors** (80px avatars) - Active recurring supporters and recent one-time supporters
+- **Backers** (60px avatars) - Small supporters below the sponsor threshold
 - **Past Sponsors** (40px avatars) - Previous supporters
 
 ## 📊 Sponsor Categorization Logic
 
-### Special Sponsors (80px avatars)
+For the full rulebook, see [`SPONSOR_RULES.md`](./SPONSOR_RULES.md).
+
+### Special Sponsors (100px avatars)
 Sponsors are categorized as "Special" if they meet any of these criteria:
 
-1. **Recurring High-Value Sponsors**: Have a `$100+` monthly tier (recurring payments)
-2. **Very High-Value One-Time Sponsors**: Contributed `$400+` in one-time payments
-3. **Recent High-Value One-Time Sponsors**: Contributed `$100+` within the last 30 days
+1. **Active Recurring High-Value Sponsors**: Have an active `$100+` monthly recurring tier
+2. **Time-Boxed High-Value One-Time Sponsors**: Made an individual `$100+` one-time contribution. The special window is `30 days` per full `$100`, so `$100` gets 30 days, `$200` gets 60 days, and `$400` gets 120 days.
 
 **Examples:**
 - Novu: `$100/month` recurring → Special
-- Steven Tey: `$421` one-time → Special (≥$400)
-- Felipe Valencia: `$100` one-time (7 days ago) → Special (≥$100 within 30 days)
+- Guillermo Rauch: `$1,000` one-time → Special for 300 days
+- Steven Tey: `$421` one-time → Special for 120 days, then Past after that window
 
-### Current Sponsors (60px avatars)
+### Current Sponsors (80px avatars)
 Sponsors are categorized as "Current" if they are:
 
 1. **Active Recurring Sponsors**: Have monthly/yearly subscriptions with recent activity
    - Monthly sponsors: Active if last transaction ≤ 60 days ago
-   - Yearly sponsors: Active if last transaction ≤ 365 days ago
-2. **Recent One-Time Sponsors**: Made any one-time contribution within the last 30 days
+   - Yearly sponsors: Active if last transaction ≤ 400 days ago
+2. **Recent One-Time Sponsors**: Made a `$5+` one-time contribution within the last 30 days
 
 **Examples:**
-- Bapusaheb Patil: `$20/month` recurring, active → Current
+- Shane Neubauer: `$10/month` yearly, active → Current
 - Ahmed Elsakaan: `$5/month` yearly, active → Current
-- Mateus Santana: `$5` one-time (today) → Current (within 30 days)
+- Aarsh: `$10` one-time within 30 days → Current
+
+### Backers (60px avatars)
+Supporters are categorized as "Backers" if they are below the normal sponsor threshold:
+
+1. **Small Active Recurring Supporters**: Active recurring tier below `$5/month`
+2. **Small One-Time Supporters**: Most recent one-time contribution below `$5`
 
 ### Past Sponsors (40px avatars)
-Sponsors are categorized as "Past" if they are:
+Supporters are categorized as "Past" if they are:
 
 1. **Inactive Recurring Sponsors**: Had subscriptions but no recent activity
-2. **Old One-Time Sponsors**: Made one-time contributions more than 30 days ago
+2. **Old One-Time Sponsors**: Made `$5+` one-time contributions more than 30 days ago
+3. **Expired High-Value One-Time Sponsors**: Made `$100+` one-time contributions outside their proportional special window
 
 **Examples:**
 - Igor Belogurov: `$10` one-time (100 days ago) → Past
-- Better Stack: `$100` one-time (31 days ago) → Past
+- Better Stack: `$100` one-time outside its 30-day special window → Past
 
 ## 🔄 Processing Flow
 
@@ -74,8 +83,11 @@ bun run scripts/process-sponsors.ts
 # Generate sponsor banner
 bun run scripts/generate-sponsors.ts
 
-# Process and upload to R2
-bun run scripts/process-sponsors.ts --yes
+# Process, generate SVG/PNG, and skip upload
+bun run sponsors
+
+# Process, generate SVG/PNG, and upload to R2
+bun run sponsors --yes
 ```
 
 ## 📁 File Structure
@@ -104,29 +116,35 @@ The generated `sponsors.json` is structured for easy web UI integration:
 {
   "generated_at": "2025-08-30T10:58:47.986Z",
   "summary": {
-    "total_sponsors": 33,
-    "total_lifetime_amount": 1729.23,
-    "total_current_monthly": 242,
-    "special_sponsors": 7,
+    "total_sponsors": 68,
+    "total_lifetime_amount": 8319.87,
+    "total_current_monthly": 556,
+    "special_sponsors": 5,
     "current_sponsors": 11,
-    "past_sponsors": 15
+    "past_sponsors": 50,
+    "backers": 2,
+    "top_sponsor": {
+      "name": "neondatabase",
+      "amount": 1800
+    }
   },
   "specialSponsors": [
     {
-      "name": "Steven Tey",
-      "githubId": "steven-tey",
-      "avatarUrl": "https://avatars.githubusercontent.com/steven-tey",
+      "name": "Guillermo Rauch",
+      "githubId": "rauchg",
+      "avatarUrl": "https://avatars.githubusercontent.com/rauchg",
       "websiteUrl": null,
-      "githubUrl": "https://github.com/steven-tey",
-      "tierName": "$421 one time",
-      "totalProcessedAmount": 421,
-      "sinceWhen": "since Jun 2025",
+      "githubUrl": "https://github.com/rauchg",
+      "tierName": "$1,000 one time",
+      "totalProcessedAmount": 1000,
+      "sinceWhen": "since Oct 2025",
       "transactionCount": 1,
-      "formattedAmount": "$421.00"
+      "formattedAmount": "$1,000.00"
     }
   ],
   "sponsors": [/* Current sponsors array */],
-  "pastSponsors": [/* Past sponsors array */]
+  "pastSponsors": [/* Past sponsors array */],
+  "backers": [/* Backers array */]
 }
 ```
 
@@ -154,6 +172,7 @@ const data = await response.json();
 const specialSponsors = data.specialSponsors;
 const currentSponsors = data.sponsors;
 const pastSponsors = data.pastSponsors;
+const backers = data.backers;
 
 // Display summary stats
 console.log(`Total: ${data.summary.total_sponsors} sponsors`);
@@ -162,7 +181,7 @@ console.log(`Lifetime: $${data.summary.total_lifetime_amount}`);
 // Example: Display a sponsor card
 specialSponsors.forEach(sponsor => {
   console.log(`${sponsor.name} - ${sponsor.formattedAmount} ${sponsor.sinceWhen}`);
-  // Output: "Steven Tey - $421.00 since Jun 2025"
+  // Output: "Guillermo Rauch - $1,000.00 since Oct 2025"
 });
 ```
 
@@ -186,15 +205,16 @@ The system tracks and displays:
 
 ### Categorization Thresholds
 Modify these values in `scripts/process-sponsors.ts`:
-- `$400+` one-time for special sponsors
-- `$100+` recurring or recent one-time for special sponsors
+- `$100+` active recurring for special sponsors
+- `$100+` individual one-time support for time-boxed special recognition
+- `30 days per $100` for one-time special recognition
 - `30 days` threshold for recent classification
 - `60 days` for monthly sponsor activity
-- `365 days` for yearly sponsor activity
+- `400 days` for yearly sponsor activity
 
 ### Banner Styling
 Customize appearance in `scripts/generate-sponsors.ts`:
-- Avatar sizes (80px, 60px, 40px)
+- Avatar sizes (100px, 80px, 60px, 40px)
 - Colors and typography
 - Layout spacing and dimensions
 
@@ -216,6 +236,6 @@ This creates a balanced system that:
 ## 📝 Notes
 
 - All amounts calculated from `processed_amount` (actual received amount)
-- Tier amounts use `tier_monthly_amount` for categorization
+- Tier amounts use `tier_monthly_amount` for categorization, so prorated first payments still count by the chosen tier
 - Activity based on `transaction_date` vs current date
-- Only public sponsors with settled transactions included
+- Only public sponsors with settled or credit-balance-adjusted transactions included

@@ -3,6 +3,7 @@
 import { join } from "path";
 
 const BUCKET_NAME = "sponsors" as const;
+const PUBLIC_BASE_URL = "https://sponsors.better-t-stack.dev" as const;
 const SOURCE_DIR: string = process.cwd();
 
 const args: string[] = process.argv.slice(2);
@@ -17,7 +18,7 @@ async function runSponsorProcessor(): Promise<void> {
 	try {
 		await Bun.$`bun scripts/process-sponsors.ts`;
 	} catch (err) {
-		console.error("❌ Failebd to run sponsor processor:", err);
+		console.error("❌ Failed to run sponsor processor:", err);
 		process.exit(1);
 	}
 }
@@ -83,9 +84,9 @@ async function main(): Promise<void> {
 
 	console.log(`\n✅ All files uploaded to R2 bucket: ${BUCKET_NAME}`);
 	console.log("\nFiles available at:");
-	console.log(`  • https://sponsors.amanvarshney.com/sponsors.json`);
-	console.log(`  • https://sponsors.amanvarshney.com/sponsors.svg`);
-	console.log(`  • https://sponsors.amanvarshney.com/sponsors.png`);
+	console.log(`  • ${PUBLIC_BASE_URL}/sponsors.json`);
+	console.log(`  • ${PUBLIC_BASE_URL}/sponsors.svg`);
+	console.log(`  • ${PUBLIC_BASE_URL}/sponsors.png`);
 }
 
 main().catch((e: unknown) => {

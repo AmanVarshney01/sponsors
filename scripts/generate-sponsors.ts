@@ -3,26 +3,13 @@
 import { existsSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import satori from "satori";
-import type { ProcessedSponsor, SponsorsData } from "../lib/types.js";
+import type { SponsorsData, UISponsor } from "../lib/types.js";
 
 const SOURCE_DIR: string = process.cwd();
 const SPONSORS_JSON: string = join(SOURCE_DIR, "generated", "sponsors.json");
 const OUTPUT_SVG: string = join(SOURCE_DIR, "generated", "sponsors.svg");
 
 const FONT_PATH = join(SOURCE_DIR, "fonts", "Inter-Regular.ttf");
-
-interface UISponsor {
-  name: string;
-  githubId: string;
-  avatarUrl: string;
-  websiteUrl: string | null;
-  githubUrl: string;
-  tierName: string;
-  totalProcessedAmount: number;
-  sinceWhen: string;
-  transactionCount: number;
-  formattedAmount: string;
-}
 
 interface SponsorRowProps {
   sponsors: UISponsor[];
@@ -72,6 +59,7 @@ function SponsorRow({ sponsors, size, label, color, showNames = true }: SponsorR
                   alignItems: 'center',
                   justifyContent: 'center',
                   backgroundColor: '#f3f4f6',
+                  boxSizing: 'border-box',
                   padding: '2px', // Add small padding to prevent tight spacing
                 },
                 children: {
@@ -141,7 +129,6 @@ function SponsorRow({ sponsors, size, label, color, showNames = true }: SponsorR
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '15px',
             },
             children: rowElements,
           },
@@ -161,11 +148,11 @@ function calculateSectionHeight(sponsors: UISponsor[], avatarSize: number, showN
   
   const labelHeight = 18 + 15; // font-size + margin-bottom
   const avatarHeight = avatarSize;
-  const nameHeight = showNames ? 6 + 11 + 4 : 6; // margin-top + font-size + extra padding, or minimum spacing for past sponsors
+  const nameHeight = showNames ? 6 + 11 + 4 : 0; // margin-top + font-size + extra padding
   const singleRowHeight = avatarHeight + nameHeight; // Height of one complete row
   const allRowsHeight = rows * singleRowHeight; // Total height for all rows
   const rowSpacing = Math.max(0, rows - 1) * 15; // 15px spacing between rows
-  const sectionMargin = rows > 0 ? 20 : 0; // Only add margin if there are rows, and reduce it
+  const sectionMargin = rows > 0 ? 30 : 0; // Match SponsorRow marginBottom
   
   const totalHeight = labelHeight + allRowsHeight + rowSpacing + sectionMargin;
   console.log(`  - Label: ${labelHeight}px, All rows: ${allRowsHeight}px (${rows} × ${singleRowHeight}px), Spacing: ${rowSpacing}px, Margin: ${sectionMargin}px = ${totalHeight}px`);
@@ -190,7 +177,7 @@ async function generateSponsors(): Promise<void> {
   }
 
   try {
-    const data: any = await Bun.file(SPONSORS_JSON).json();
+    const data = (await Bun.file(SPONSORS_JSON).json()) as Partial<SponsorsData>;
     
     const specialSponsors = data.specialSponsors || [];
     const currentSponsors = data.sponsors || [];
@@ -210,10 +197,10 @@ async function generateSponsors(): Promise<void> {
     const specialHeight = calculateSectionHeight(specialSponsors, 100, true);
     const currentHeight = calculateSectionHeight(currentSponsors, 80, true);
     const backersHeight = calculateSectionHeight(backers, 60, true);
-    const pastHeight = calculateSectionHeight(pastSponsors, 60, false);
+    const pastHeight = calculateSectionHeight(pastSponsors, 40, false);
     
     // Calculate total height dynamically based on actual content
-    const containerPadding = 40; // 20px top + 20px bottom
+    const containerPadding = 50; // 25px top + 25px bottom
     const bottomPadding = 30; // Reasonable bottom padding
     
     // Calculate total content height more precisely

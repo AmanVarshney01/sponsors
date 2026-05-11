@@ -69,13 +69,23 @@ export interface SponsorsData {
 			amount: number;
 		} | null;
 	};
-	categories: {
-		special: ProcessedSponsor[];
-		current: ProcessedSponsor[];
-		past: ProcessedSponsor[];
-		backers: ProcessedSponsor[];
-	};
-	sponsors: ProcessedSponsor[];
+	specialSponsors: UISponsor[];
+	sponsors: UISponsor[];
+	pastSponsors: UISponsor[];
+	backers: UISponsor[];
 }
 
 export type SponsorEntry = ProcessedSponsor;
+
+export interface UISponsor {
+	name: string;
+	githubId: string;
+	avatarUrl: string;
+	websiteUrl: string | null;
+	githubUrl: string;
+	tierName: string;
+	sinceWhen: string;
+	transactionCount: number;
+	totalProcessedAmount: number;
+	formattedAmount: string;
+}

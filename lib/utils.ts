@@ -1,4 +1,4 @@
-import type { ProcessedSponsor, RawSponsor, Transaction } from "./types.js";
+import type { ProcessedSponsor } from "./types.js";
 import Currency from "currency.js";
 
 export function parseAmount(amountStr: string): number {
@@ -28,6 +28,11 @@ export function formatAmountShort(amount: number): string {
 export function formatAmountDetailed(amount: number): string {
 	return `$${amount.toFixed(2)}`;
 }
+
+export function roundCurrency(amount: number): number {
+	return Currency(amount).value;
+}
+
 export function getCountryName(countryCode: string): string {
 	const countryNames: Record<string, string> = {
 		USA: "United States",
@@ -52,10 +57,11 @@ export function getCountryName(countryCode: string): string {
 }
 
 export function isRecurringTier(tierName: string): boolean {
+	const normalizedTierName = tierName.toLowerCase();
 	return (
-		tierName.includes("a month") ||
-		tierName.includes("monthly") ||
-		tierName.includes("/month")
+		normalizedTierName.includes("a month") ||
+		normalizedTierName.includes("monthly") ||
+		normalizedTierName.includes("/month")
 	);
 }
 
@@ -67,6 +73,26 @@ export function formatSponsorUrl(url: string | undefined): string {
 		return urlObj.hostname.replace("www.", "");
 	} catch {
 		return url.replace(/^https?:\/\/(www\.)?/, "").split("/")[0] || "";
+	}
+}
+
+export function normalizeSponsorUrl(url: string | null | undefined): string | null {
+	const trimmedUrl = url?.trim();
+	if (!trimmedUrl) return null;
+
+	try {
+		const normalizedUrl = trimmedUrl.match(/^https?:\/\//i)
+			? trimmedUrl
+			: `https://${trimmedUrl}`;
+		const parsedUrl = new URL(normalizedUrl);
+
+		if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+			return null;
+		}
+
+		return parsedUrl.toString();
+	} catch {
+		return null;
 	}
 }
 

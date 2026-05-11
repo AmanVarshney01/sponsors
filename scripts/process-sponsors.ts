@@ -1,11 +1,18 @@
 #!/usr/bin/env bun
 
 import { existsSync, writeFileSync, mkdirSync } from "fs";
-import { join, dirname } from "path";
-import type { ProcessedSponsor, RawSponsor, SponsorsData } from "../lib/types.js";
+import { dirname, join } from "path";
+import type {
+	ProcessedSponsor,
+	RawSponsor,
+	SponsorsData,
+	UISponsor,
+} from "../lib/types.js";
 import {
 	parseAmount,
 	formatAmount,
+	roundCurrency,
+	normalizeSponsorUrl,
 	getCountryName,
 	isRecurringTier,
 	filterSpecialSponsors,
@@ -13,7 +20,6 @@ import {
 	filterPastSponsors,
 	filterBackers,
 	sortSponsors,
-	getRelativeTime
 } from "../lib/utils.js";
 
 interface GitHubUser {
@@ -39,10 +45,15 @@ const GITHUB_API_BASE = "https://api.github.com";
 const args: string[] = process.argv.slice(2);
 const autoYes: boolean = args.includes("--yes") || args.includes("-y");
 
-async function fetchGitHubUser(username: string, hasShownTokenWarning: { value: boolean }): Promise<GitHubUser | null> {
+async function fetchGitHubUser(
+	username: string,
+	hasShownTokenWarning: { value: boolean },
+): Promise<GitHubUser | null> {
 	if (!GITHUB_TOKEN) {
 		if (!hasShownTokenWarning.value) {
-			console.warn(`⚠️  No GitHub token found. Set GITHUB_TOKEN environment variable to fetch website URLs.`);
+			console.warn(
+				"⚠️  No GitHub token found. Set GITHUB_TOKEN environment variable to fetch website URLs.",
+			);
 			hasShownTokenWarning.value = true;
 		}
 		return null;
@@ -51,10 +62,10 @@ async function fetchGitHubUser(username: string, hasShownTokenWarning: { value: 
 	try {
 		const response = await fetch(`${GITHUB_API_BASE}/users/${username}`, {
 			headers: {
-				'Authorization': `token ${GITHUB_TOKEN}`,
-				'Accept': 'application/vnd.github.v3+json',
-				'User-Agent': 'sponsorkit/1.0.0'
-			}
+				Authorization: `token ${GITHUB_TOKEN}`,
+				Accept: "application/vnd.github.v3+json",
+				"User-Agent": "sponsorkit/1.0.0",
+			},
 		});
 
 		if (!response.ok) {
@@ -69,7 +80,7 @@ async function fetchGitHubUser(username: string, hasShownTokenWarning: { value: 
 			throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
 		}
 
-		const user = await response.json() as GitHubUser;
+		const user = (await response.json()) as GitHubUser;
 		return user;
 	} catch (error) {
 		console.error(`❌ Failed to fetch GitHub user ${username}:`, error);
@@ -77,11 +88,9 @@ async function fetchGitHubUser(username: string, hasShownTokenWarning: { value: 
 	}
 }
 
-
-
 async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedSponsor[]> {
 	const validSponsors: ProcessedSponsor[] = [];
-	let hasShownTokenWarning = false;
+	const tokenWarningState = { value: false };
 
 	// Constants for categorization
 	const SPECIAL_THRESHOLD = 100; // $100+ = special sponsor
@@ -112,10 +121,10 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 		const recurringTransactions = validTransactions.filter((t) =>
 			isRecurringTier(t.tier_name),
 		);
-		const oneTimeTransactions = validTransactions.filter((t) => 
-			!isRecurringTier(t.tier_name)
+		const oneTimeTransactions = validTransactions.filter(
+			(t) => !isRecurringTier(t.tier_name),
 		);
-		
+
 		const hasRecurringTiers = recurringTransactions.length > 0;
 		const recurringTierAmount = hasRecurringTiers
 			? Math.max(
@@ -131,14 +140,18 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 				new Date(b.transaction_date).getTime() -
 				new Date(a.transaction_date).getTime(),
 		)[0];
-		
+
 		const currentMonthlyAmount = latestRecurringTransaction
 			? parseAmount(latestRecurringTransaction.tier_monthly_amount)
 			: 0;
 
 		// Days since last RECURRING transaction (for determining active status)
 		const daysSinceLastRecurring = latestRecurringTransaction
-			? Math.floor((Date.now() - new Date(latestRecurringTransaction.transaction_date).getTime()) / (1000 * 60 * 60 * 24))
+			? Math.floor(
+				(Date.now() -
+					new Date(latestRecurringTransaction.transaction_date).getTime()) /
+					(1000 * 60 * 60 * 24),
+			)
 			: Infinity;
 
 		// Determine if primarily one-time or recurring
@@ -153,7 +166,8 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 				new Date(b.transaction_date).getTime() -
 				new Date(a.transaction_date).getTime(),
 		)[0];
-		const latestTransactionDate = latestTransaction?.transaction_date || firstSponsorshipDate;
+		const latestTransactionDate =
+			latestTransaction?.transaction_date || firstSponsorshipDate;
 
 		const daysSinceLastTransaction = Math.floor(
 			(Date.now() - new Date(latestTransactionDate).getTime()) /
@@ -167,24 +181,25 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 			isCurrentlyActive = false;
 		} else {
 			const isYearlySponsor = sponsor.is_yearly;
-			const activeThreshold = isYearlySponsor ? YEARLY_ACTIVE_DAYS : RECURRING_ACTIVE_DAYS;
+			const activeThreshold = isYearlySponsor
+				? YEARLY_ACTIVE_DAYS
+				: RECURRING_ACTIVE_DAYS;
 			// Use daysSinceLastRecurring to properly detect cancelled subscriptions
 			isCurrentlyActive = daysSinceLastRecurring <= activeThreshold;
 		}
 
-		// Find special qualifying transactions ($100+ individual donations)
-		// Key fix: Check individual transaction amounts, not cumulative totals
+		// Individual $100+ one-time donations get a time-boxed special window.
 		const specialOneTimeTransactions = oneTimeTransactions.filter(
-			(t) => parseAmount(t.tier_monthly_amount) >= SPECIAL_THRESHOLD
+			(t) => parseAmount(t.tier_monthly_amount) >= SPECIAL_THRESHOLD,
 		);
-		
+
 		// Get the most recent $100+ one-time donation and calculate its special status window
 		const latestSpecialOneTime = specialOneTimeTransactions.sort(
 			(a, b) =>
 				new Date(b.transaction_date).getTime() -
 				new Date(a.transaction_date).getTime(),
 		)[0];
-		
+
 		// Calculate special status duration based on individual donation amount
 		// $100 = 1 month, $200 = 2 months, etc.
 		let isWithinSpecialWindow = false;
@@ -193,7 +208,9 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 			const specialMonths = Math.max(1, Math.floor(donationAmount / 100));
 			const specialDays = specialMonths * 30;
 			const daysSinceSpecialDonation = Math.floor(
-				(Date.now() - new Date(latestSpecialOneTime.transaction_date).getTime()) / (1000 * 60 * 60 * 24)
+				(Date.now() -
+					new Date(latestSpecialOneTime.transaction_date).getTime()) /
+					(1000 * 60 * 60 * 24),
 			);
 			isWithinSpecialWindow = daysSinceSpecialDonation <= specialDays;
 		}
@@ -205,17 +222,28 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 				new Date(a.transaction_date).getTime(),
 		)[0];
 		const daysSinceLastOneTime = latestOneTimeTransaction
-			? Math.floor((Date.now() - new Date(latestOneTimeTransaction.transaction_date).getTime()) / (1000 * 60 * 60 * 24))
+			? Math.floor(
+				(Date.now() -
+					new Date(latestOneTimeTransaction.transaction_date).getTime()) /
+					(1000 * 60 * 60 * 24),
+			)
 			: Infinity;
+		const latestOneTimeAmount = latestOneTimeTransaction
+			? parseAmount(latestOneTimeTransaction.tier_monthly_amount)
+			: 0;
+		const hasRecentNormalOneTime =
+			latestOneTimeAmount >= NORMAL_MIN_THRESHOLD &&
+			daysSinceLastOneTime <= ONE_TIME_CURRENT_DAYS;
 
 		// === CATEGORY ASSIGNMENT ===
 		// User's rules: $5-99 = normal sponsor, $100+ = special sponsor
 		let category: "special" | "current" | "past" | "backers";
 
 		// Check for special status first (individual $100+ donations)
-		const hasActiveSpecialRecurring = isCurrentlyActive && currentMonthlyAmount >= SPECIAL_THRESHOLD;
+		const hasActiveSpecialRecurring =
+			isCurrentlyActive && currentMonthlyAmount >= SPECIAL_THRESHOLD;
 		const hasActiveSpecialOneTime = isWithinSpecialWindow;
-		
+
 		if (hasActiveSpecialRecurring || hasActiveSpecialOneTime) {
 			category = "special";
 		}
@@ -223,6 +251,8 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 		else if (hasRecurringTiers) {
 			// Recurring sponsor
 			if (isCurrentlyActive && currentMonthlyAmount >= NORMAL_MIN_THRESHOLD) {
+				category = "current";
+			} else if (hasRecentNormalOneTime) {
 				category = "current";
 			} else if (currentMonthlyAmount >= NORMAL_MIN_THRESHOLD) {
 				// Had a $5+ tier but no longer active
@@ -235,18 +265,14 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 		}
 		// Pure one-time sponsors
 		else {
-			const latestAmount = latestOneTimeTransaction 
-				? parseAmount(latestOneTimeTransaction.tier_monthly_amount)
-				: 0;
-			
-			if (latestAmount >= NORMAL_MIN_THRESHOLD) {
+			if (latestOneTimeAmount >= NORMAL_MIN_THRESHOLD) {
 				// Recent one-time donation stays "current" for 30 days
-				if (daysSinceLastOneTime <= ONE_TIME_CURRENT_DAYS) {
+				if (hasRecentNormalOneTime) {
 					category = "current";
 				} else {
 					category = "past";
 				}
-			} else if (latestAmount > 0) {
+			} else if (latestOneTimeAmount > 0) {
 				category = "backers";
 			} else {
 				category = "past";
@@ -293,19 +319,28 @@ async function processSponsorData(rawSponsors: RawSponsor[]): Promise<ProcessedS
 			sponsor.sponsor_profile_name || sponsor.sponsor_handle;
 
 		// Fetch GitHub user data for website URL
-		const githubUser = await fetchGitHubUser(sponsor.sponsor_handle, { value: hasShownTokenWarning });
-		const websiteUrl = githubUser?.blog || null;
+		const githubUser = await fetchGitHubUser(
+			sponsor.sponsor_handle,
+			tokenWarningState,
+		);
+		const websiteUrl = normalizeSponsorUrl(githubUser?.blog);
 
 		// Add small delay to respect GitHub API rate limits
-		await new Promise(resolve => setTimeout(resolve, 100));
+		if (GITHUB_TOKEN) {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+		}
 
 		validSponsors.push({
 			sponsor: {
 				login: sponsor.sponsor_handle,
 				name: githubUser?.name || displayName,
-				avatarUrl: githubUser?.avatar_url || `https://avatars.githubusercontent.com/${sponsor.sponsor_handle}`,
+				avatarUrl:
+					githubUser?.avatar_url ||
+					`https://avatars.githubusercontent.com/${sponsor.sponsor_handle}`,
 				websiteUrl,
-				linkUrl: githubUser?.html_url || `https://github.com/${sponsor.sponsor_handle}`,
+				linkUrl:
+					githubUser?.html_url ||
+					`https://github.com/${sponsor.sponsor_handle}`,
 				customLogoUrl: undefined,
 				type: githubUser?.type || "User",
 			},
@@ -350,51 +385,46 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 	const pastSponsors = filterPastSponsors(sponsors);
 	const backers = filterBackers(sponsors);
 
-	const totalAmount = sponsors.reduce(
-		(sum, s) => sum + s.totalLifetimeAmount,
-		0,
+	const totalAmount = roundCurrency(
+		sponsors.reduce((sum, s) => sum + s.totalLifetimeAmount, 0),
 	);
-	const totalMonthlyAmount = sponsors
-		.filter((s) => s.isCurrentlyActive)
-		.reduce((sum, s) => sum + s.currentMonthlyAmount, 0);
-
-
+	const totalMonthlyAmount = roundCurrency(
+		sponsors
+			.filter((s) => s.isCurrentlyActive)
+			.reduce((sum, s) => sum + s.currentMonthlyAmount, 0),
+	);
+	const topSponsor = [...sponsors].sort(
+		(a, b) => b.totalLifetimeAmount - a.totalLifetimeAmount,
+	)[0];
 
 	// Helper function to format "since when" nicely
 	const formatSinceWhen = (dateString: string): string => {
 		const date = new Date(dateString);
-		const month = date.toLocaleDateString('en-US', { month: 'short' });
+		const month = date.toLocaleDateString("en-US", { month: "short" });
 		const year = date.getFullYear();
 		return `since ${month} ${year}`;
 	};
 
 	// Helper function to format sponsor data for UI
-	const formatSponsorForUI = (sponsor: ProcessedSponsor) => {
+	const formatSponsorForUI = (sponsor: ProcessedSponsor): UISponsor => {
 		const baseData = {
 			name: sponsor.sponsor.name,
 			githubId: sponsor.sponsor.login,
 			avatarUrl: sponsor.sponsor.avatarUrl,
-			websiteUrl: sponsor.sponsor.websiteUrl,
+			websiteUrl: sponsor.sponsor.websiteUrl ?? null,
 			githubUrl: sponsor.sponsor.linkUrl,
 			tierName: sponsor.tierName,
 			sinceWhen: formatSinceWhen(sponsor.firstSponsorshipDate),
 			transactionCount: sponsor.transactionCount,
+			totalProcessedAmount: roundCurrency(sponsor.totalLifetimeAmount),
+			formattedAmount: formatAmount(sponsor.totalLifetimeAmount),
 		};
-
-		// Only include total amount fields for sponsors with multiple transactions
-		if (sponsor.transactionCount > 1) {
-			return {
-				...baseData,
-				totalProcessedAmount: sponsor.totalLifetimeAmount,
-				formattedAmount: formatAmount(sponsor.totalLifetimeAmount),
-			};
-		}
 
 		return baseData;
 	};
 
 	// Create output structure optimized for UI
-	const output = {
+	const output: SponsorsData = {
 		// Metadata
 		generated_at: new Date().toISOString(),
 		summary: {
@@ -406,10 +436,10 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 			past_sponsors: pastSponsors.length,
 			backers: backers.length,
 			top_sponsor:
-				sponsors.length > 0
+				topSponsor
 					? {
-						name: sponsors[0]?.sponsor.name || "Unknown",
-						amount: sponsors[0]?.totalLifetimeAmount || 0,
+						name: topSponsor.sponsor.name,
+						amount: roundCurrency(topSponsor.totalLifetimeAmount),
 					}
 					: null,
 		},
@@ -419,11 +449,7 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 		sponsors: currentSponsors.map(formatSponsorForUI),
 		pastSponsors: pastSponsors.map(formatSponsorForUI),
 		backers: backers.map(formatSponsorForUI),
-
-
 	};
-
-
 
 	// Ensure the directory exists
 	mkdirSync(dirname(OUTPUT_SPONSORS_JSON), { recursive: true });
@@ -434,7 +460,7 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 	console.log("\n📈 Summary:");
 	console.log(`   • Total sponsors: ${sponsors.length}`);
 	console.log(
-		`   • Special sponsors ($100+ monthly tier): ${specialSponsors.length}`,
+		`   • Special sponsors ($100+ active recurring or time-boxed one-time): ${specialSponsors.length}`,
 	);
 	console.log(`   • Current sponsors: ${currentSponsors.length}`);
 	console.log(`   • Past sponsors: ${pastSponsors.length}`);
@@ -446,7 +472,7 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 
 	if (sponsors.length > 0) {
 		console.log(
-			`   • Top sponsor: ${sponsors[0]?.sponsor.name || "Unknown"} (${formatAmount(sponsors[0]?.totalLifetimeAmount || 0)} lifetime)`,
+			`   • Top sponsor: ${topSponsor?.sponsor.name || "Unknown"} (${formatAmount(topSponsor?.totalLifetimeAmount || 0)} lifetime)`,
 		);
 	}
 
@@ -464,19 +490,18 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 	}
 }
 
-async function uploadToR2(file: string): Promise<void> {
+async function uploadToR2(file: string, targetKey = file): Promise<void> {
 	const filePath = join(SOURCE_DIR, file);
 	if (!existsSync(filePath)) {
 		console.warn(`⚠️  Warning: ${filePath} does not exist.`);
 		return;
 	}
 
-	const key = file;
-	console.log(`📤 Uploading ${file} to r2://sponsors/${key} ...`);
+	console.log(`📤 Uploading ${file} to r2://sponsors/${targetKey} ...`);
 
 	try {
-		await Bun.$`bunx wrangler r2 object put sponsors/${key} --file=${filePath} --remote`;
-		console.log(`✅ Successfully uploaded ${file}`);
+		await Bun.$`bunx wrangler r2 object put sponsors/${targetKey} --file=${filePath} --remote`;
+		console.log(`✅ Successfully uploaded ${targetKey}`);
 	} catch (err) {
 		console.error(`❌ Failed to upload ${file}:`, err);
 	}
@@ -511,7 +536,7 @@ async function main(): Promise<void> {
 		// Upload to R2 if requested
 		if (autoYes) {
 			console.log("\n📤 Uploading files to R2...");
-			await uploadToR2("sponsors.json");
+			await uploadToR2("generated/sponsors.json", "sponsors.json");
 			console.log(`✅ Files uploaded to R2 bucket`);
 		} else {
 			console.log("\n💡 Run with --yes to upload files to R2");
