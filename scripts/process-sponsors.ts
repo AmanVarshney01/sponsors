@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-import { existsSync, writeFileSync, mkdirSync } from "fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import type {
 	ProcessedSponsor,
@@ -42,8 +42,36 @@ const OUTPUT_SPONSORS_JSON: string = join(SOURCE_DIR, "generated", "sponsors.jso
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_API_BASE = "https://api.github.com";
 
+// Manual per-sponsor overrides, loaded from sponsor-overrides.json (see below).
+const OVERRIDES_FILE: string = join(SOURCE_DIR, "sponsor-overrides.json");
+
 const args: string[] = process.argv.slice(2);
 const autoYes: boolean = args.includes("--yes") || args.includes("-y");
+
+// Manual overrides keyed by lowercase GitHub handle. Each entry is a partial
+// UISponsor: any field present here replaces the auto-generated value.
+type SponsorOverride = Partial<Omit<UISponsor, "githubId">>;
+
+function loadOverrides(): Record<string, SponsorOverride> {
+	if (!existsSync(OVERRIDES_FILE)) return {};
+	try {
+		const raw = JSON.parse(readFileSync(OVERRIDES_FILE, "utf-8")) as Record<
+			string,
+			SponsorOverride
+		>;
+		// Normalize keys to lowercase for case-insensitive matching.
+		const normalized: Record<string, SponsorOverride> = {};
+		for (const [handle, override] of Object.entries(raw)) {
+			normalized[handle.toLowerCase()] = override;
+		}
+		return normalized;
+	} catch (err) {
+		console.warn(`⚠️  Failed to parse ${OVERRIDES_FILE}:`, err);
+		return {};
+	}
+}
+
+const SPONSOR_OVERRIDES: Record<string, SponsorOverride> = loadOverrides();
 
 async function fetchGitHubUser(
 	username: string,
@@ -420,7 +448,9 @@ function generateSponsorsJson(sponsors: ProcessedSponsor[]): void {
 			formattedAmount: formatAmount(sponsor.totalLifetimeAmount),
 		};
 
-		return baseData;
+		// Apply any manual overrides for this sponsor (matched by GitHub handle).
+		const override = SPONSOR_OVERRIDES[sponsor.sponsor.login.toLowerCase()];
+		return override ? { ...baseData, ...override } : baseData;
 	};
 
 	// Create output structure optimized for UI
