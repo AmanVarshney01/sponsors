@@ -82,6 +82,10 @@ export interface UISponsor {
 	githubId: string;
 	avatarUrl: string;
 	websiteUrl: string | null;
+	// Optional display text for the website link. When set, the UI should show
+	// this label while linking to websiteUrl (e.g. show "CodeRabbit.ai" but
+	// link to a redirect URL). Falls back to websiteUrl when absent.
+	websiteLabel?: string | null;
 	githubUrl: string;
 	tierName: string;
 	sinceWhen: string;
