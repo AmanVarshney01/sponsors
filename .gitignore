@@ -1,6 +1,7 @@
 .env
 /node_modules/
 .wrangler
+.DS_Store
 
 # GitHub sponsorship data (contains sensitive information)
 AmanVarshney01-sponsorships-all-time.json
