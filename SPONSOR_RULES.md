@@ -8,6 +8,7 @@ This document describes the rules used by `scripts/process-sponsors.ts` to turn 
 - Only public sponsors are included. Private sponsors are intentionally excluded from public output and public summary totals.
 - Only transactions with status `settled` or `credit_balance_adjusted` are counted.
 - Sponsors with no valid public transactions are skipped.
+- Known sponsor identity aliases are merged before categorization. For example, `Neon-Open-Source-Treasury` is treated as `neondatabase` so the current funding source and historical GitHub sponsor profile display as one sponsor.
 
 ## Amounts
 

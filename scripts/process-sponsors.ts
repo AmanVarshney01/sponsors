@@ -73,6 +73,89 @@ function loadOverrides(): Record<string, SponsorOverride> {
 
 const SPONSOR_OVERRIDES: Record<string, SponsorOverride> = loadOverrides();
 
+const SPONSOR_HANDLE_ALIASES: Record<string, string> = {
+	"neon-open-source-treasury": "neondatabase",
+};
+
+function getCanonicalSponsorHandle(handle: string): string {
+	return SPONSOR_HANDLE_ALIASES[handle.toLowerCase()] ?? handle;
+}
+
+function mergeTransactions(
+	first: RawSponsor["transactions"],
+	second: RawSponsor["transactions"],
+): RawSponsor["transactions"] {
+	const transactionsById = new Map<
+		string,
+		RawSponsor["transactions"][number]
+	>();
+
+	for (const transaction of [...first, ...second]) {
+		transactionsById.set(transaction.transaction_id, transaction);
+	}
+
+	return [...transactionsById.values()];
+}
+
+function mergeSponsorRecords(rawSponsors: RawSponsor[]): RawSponsor[] {
+	const sponsorsByHandle = new Map<string, RawSponsor>();
+	const privateSponsors: RawSponsor[] = [];
+
+	for (const sponsor of rawSponsors) {
+		if (!sponsor.is_public) {
+			privateSponsors.push(sponsor);
+			continue;
+		}
+
+		const canonicalHandle = getCanonicalSponsorHandle(sponsor.sponsor_handle);
+		const canonicalKey = canonicalHandle.toLowerCase();
+		const existing = sponsorsByHandle.get(canonicalKey);
+
+		if (!existing) {
+			sponsorsByHandle.set(canonicalKey, {
+				...sponsor,
+				sponsor_handle: canonicalHandle,
+				sponsor_profile_name: sponsor.sponsor_profile_name ?? canonicalHandle,
+				transactions: [...sponsor.transactions],
+				metadata: { ...sponsor.metadata },
+			});
+			continue;
+		}
+
+		const sponsorIsCanonical =
+			sponsor.sponsor_handle.toLowerCase() === canonicalKey;
+		const identitySource = sponsorIsCanonical ? sponsor : existing;
+		const existingStartedAt = new Date(existing.sponsorship_started_on).getTime();
+		const sponsorStartedAt = new Date(sponsor.sponsorship_started_on).getTime();
+
+		sponsorsByHandle.set(canonicalKey, {
+			...identitySource,
+			sponsor_handle: canonicalHandle,
+			sponsor_profile_name: identitySource.sponsor_profile_name ?? canonicalHandle,
+			sponsor_public_email:
+				identitySource.sponsor_public_email ??
+				existing.sponsor_public_email ??
+				sponsor.sponsor_public_email,
+			sponsorship_started_on:
+				sponsorStartedAt < existingStartedAt
+					? sponsor.sponsorship_started_on
+					: existing.sponsorship_started_on,
+			is_public: existing.is_public || sponsor.is_public,
+			is_yearly: existing.is_yearly || sponsor.is_yearly,
+			transactions: mergeTransactions(
+				existing.transactions,
+				sponsor.transactions,
+			),
+			metadata: {
+				...existing.metadata,
+				...sponsor.metadata,
+			},
+		});
+	}
+
+	return [...sponsorsByHandle.values(), ...privateSponsors];
+}
+
 async function fetchGitHubUser(
 	username: string,
 	hasShownTokenWarning: { value: boolean },
@@ -88,24 +171,62 @@ async function fetchGitHubUser(
 	}
 
 	try {
-		const response = await fetch(`${GITHUB_API_BASE}/users/${username}`, {
-			headers: {
-				Authorization: `token ${GITHUB_TOKEN}`,
-				Accept: "application/vnd.github.v3+json",
-				"User-Agent": "sponsorkit/1.0.0",
-			},
+		const url = `${GITHUB_API_BASE}/users/${encodeURIComponent(username)}`;
+		const headers = new Headers({
+			Authorization: `token ${GITHUB_TOKEN}`,
+			Accept: "application/vnd.github.v3+json",
+			"User-Agent": "sponsorkit/1.0.0",
 		});
+		let response = await fetch(url, { headers });
+		let errorBody = response.ok
+			? null
+			: (await response.json().catch(() => null)) as { message?: string } | null;
+
+		// Some organizations block classic PATs even for this public endpoint.
+		// Retry only that policy rejection; keep using the token for other users.
+		if (
+			response.status === 403 &&
+			response.headers.get("x-ratelimit-remaining") !== "0" &&
+			!response.headers.has("retry-after") &&
+			errorBody?.message?.includes("forbids access via a personal access token (classic)")
+		) {
+			console.log(
+				`ℹ️  ${username} blocks classic GitHub tokens; fetching its public profile without authentication.`,
+			);
+			headers.delete("Authorization");
+			response = await fetch(url, { headers });
+			errorBody = response.ok
+				? null
+				: (await response.json().catch(() => null)) as { message?: string } | null;
+		}
 
 		if (!response.ok) {
 			if (response.status === 404) {
 				console.warn(`⚠️  User ${username} not found on GitHub`);
 				return null;
 			}
-			if (response.status === 403) {
-				console.warn(`⚠️  GitHub API rate limit exceeded or token invalid`);
+			const message = errorBody?.message || response.statusText;
+			const isRateLimited =
+				response.status === 429 ||
+				(response.status === 403 && (
+					response.headers.get("x-ratelimit-remaining") === "0" ||
+					response.headers.has("retry-after") ||
+					/rate limit/i.test(message)
+				));
+			if (isRateLimited) {
+				const reset = response.headers.get("x-ratelimit-reset");
+				const retryAfter = response.headers.get("retry-after");
+				const resetDate = reset ? new Date(Number(reset) * 1000) : null;
+				const retryHint = retryAfter
+					? ` Retry after ${retryAfter} seconds.`
+					: resetDate && !Number.isNaN(resetDate.getTime())
+						? ` Resets at ${resetDate.toISOString()}.`
+						: "";
+				console.warn(`⚠️  GitHub API rate limit for ${username}: ${message}${retryHint}`);
 				return null;
 			}
-			throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+			console.warn(`⚠️  GitHub API error for ${username} (${response.status}): ${message}`);
+			return null;
 		}
 
 		const user = (await response.json()) as GitHubUser;
@@ -553,9 +674,16 @@ async function main(): Promise<void> {
 		// Read and parse GitHub export
 		const rawData = (await Bun.file(GITHUB_EXPORT_FILE).json()) as RawSponsor[];
 		console.log(`📊 Found ${rawData.length} total sponsorship records`);
+		const mergedData = mergeSponsorRecords(rawData);
+
+		if (mergedData.length !== rawData.length) {
+			console.log(
+				`🔗 Merged ${rawData.length - mergedData.length} aliased sponsorship record(s)`,
+			);
+		}
 
 		// Process sponsor data
-		const processedSponsors = await processSponsorData(rawData);
+		const processedSponsors = await processSponsorData(mergedData);
 		console.log(
 			`✨ Processed ${processedSponsors.length} public sponsors with valid transactions`,
 		);
