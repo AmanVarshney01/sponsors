@@ -36,7 +36,7 @@ async function generateSponsorBanner(): Promise<void> {
 async function generatePNG(): Promise<void> {
 	console.log("🖼️  Converting SVG to PNG...");
 	try {
-		await Bun.$`bunx sharp-cli -i generated/sponsors.svg -o generated/sponsors.png`;
+		await Bun.$`npx -y sharp-cli -i generated/sponsors.svg -o generated/sponsors.png`;
 	} catch (err) {
 		console.error("❌ Failed to generate PNG:", err);
 		process.exit(1);
